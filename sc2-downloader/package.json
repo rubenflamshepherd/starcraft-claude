@@ -1,0 +1,16 @@
+{
+  "name": "sc2-protoss-quotes",
+  "version": "1.0.0",
+  "description": "Browse and download StarCraft II Protoss unit quotations",
+  "scripts": {
+    "install:all": "npm install && cd frontend && npm install && cd ../server && npm install",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "scrape": "cd scripts && npm run scrape",
+    "build": "cd frontend && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
