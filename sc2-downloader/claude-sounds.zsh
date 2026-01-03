@@ -5,7 +5,7 @@
 CLAUDE_DIR="$HOME/.claude"
 
 export CLAUDE_SOUNDS_DIR="${CLAUDE_SOUNDS_DIR:-$HOME/.claude/sounds}"
-export CLAUDE_SOUND_VOLUME="${CLAUDE_SOUND_VOLUME:-}"  # 0-100, empty = default
+export CLAUDE_SOUND_VOLUME="${CLAUDE_SOUND_VOLUME:-0.3}"  # 0-1 multiplier, 1 = full volume
 
 # Trigger files (created by Claude hooks)
 export CLAUDE_DONE_FILE="${CLAUDE_DONE_FILE:-$CLAUDE_DIR/.claude-done}"
@@ -20,6 +20,7 @@ export CLAUDE_PROMPT_SOUNDS="${CLAUDE_PROMPT_SOUNDS:-$CLAUDE_SOUNDS_DIR/userprom
 export CLAUDE_PRECOMPACT_SOUNDS="${CLAUDE_PRECOMPACT_SOUNDS:-$CLAUDE_SOUNDS_DIR/precompact}"
 
 CLAUDE_WATCHER_PID_FILE="$HOME/.claude_watcher.pid"
+CLAUDE_SOUNDS_ENABLED_FILE="$HOME/.claude_sounds_enabled"
 
 # Pick a random sound file from a directory
 _claude_random_sound() {
@@ -92,12 +93,14 @@ claude_sound_watcher_start() {
 }
 
 claude_sound_watcher_stop() {
+  # Kill by PID file if exists
   if [ -f "$CLAUDE_WATCHER_PID_FILE" ]; then
     local pid=$(cat "$CLAUDE_WATCHER_PID_FILE")
-    # Kill process group (negative PID)
     kill -- -"$pid" 2>/dev/null || kill "$pid" 2>/dev/null
     rm -f "$CLAUDE_WATCHER_PID_FILE"
   fi
+  # Kill any orphaned fswatch processes watching claude files
+  pkill -f "fswatch.*\.claude-" 2>/dev/null
 }
 
 claude_sound_watcher_restart() {
@@ -115,5 +118,22 @@ claude_sound_watcher_status() {
   fi
 }
 
-# Start watcher in background if not already running
-claude_sound_watcher_start
+claude_sounds_toggle() {
+  if [ -f "$CLAUDE_WATCHER_PID_FILE" ] && kill -0 "$(cat "$CLAUDE_WATCHER_PID_FILE")" 2>/dev/null; then
+    claude_sound_watcher_stop
+    echo "0" > "$CLAUDE_SOUNDS_ENABLED_FILE"
+    echo "claude-sounds: OFF"
+  else
+    claude_sound_watcher_start
+    echo "1" > "$CLAUDE_SOUNDS_ENABLED_FILE"
+    echo "claude-sounds: ON"
+  fi
+}
+
+# Short alias for quick toggling
+alias cst='claude_sounds_toggle'
+
+# Start watcher in background if enabled (default: on)
+if [ ! -f "$CLAUDE_SOUNDS_ENABLED_FILE" ] || [ "$(cat "$CLAUDE_SOUNDS_ENABLED_FILE")" = "1" ]; then
+  claude_sound_watcher_start
+fi
