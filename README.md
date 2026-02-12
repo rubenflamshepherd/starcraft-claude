@@ -1,6 +1,6 @@
 # StarCraft Sounds for Claude Code
 
-Play StarCraft II unit sounds during your Claude Code workflow. Hear Protoss units react when you submit prompts, when Claude finishes tasks, and more.
+Play game unit sounds during your Claude Code workflow. Browse quotes from StarCraft II, Warcraft II, and Age of Empires III, then hear units react when you submit prompts, when Claude finishes tasks, and more.
 
 ## How It Works
 
@@ -11,6 +11,8 @@ Claude Code [hooks](https://docs.anthropic.com/en/docs/claude-code/hooks) trigge
 - `UserPromptSubmit` - You submit a prompt
 - `Stop` - Claude finishes responding
 - `PreCompact` - Context compaction is about to happen
+- `PermissionPrompt` - Claude needs permission to use a tool
+- `Question` - Claude asks the user a question
 
 ## Prerequisites
 
@@ -32,24 +34,36 @@ npm run install:all
 npm run dev
 ```
 
-Open http://localhost:5173, browse units, and select quotes. Use the dropdown to pick which event folder to save to, then click **Save to Sounds**. Files are saved directly to `~/.claude/sounds/<folder>/`.
+Open http://localhost:5173, and select "One Click Setup" to quickly get up and running. From there you can browse units from multiple games, and curate your sounds.
+
+**Custom Lists** - Create multiple named sound configurations (e.g., "All Protoss", "Zerg Only", "Chill Mode") and switch between them. The app ships with a default "Recommended" list. Use the dropdown in the recommended view to switch lists, and the +/pencil/trash buttons to create, rename, or delete lists.
+
+**Adding sounds** - Browse a unit's quotes, then use the "+Hook" buttons to add sounds to hooks on your active list. Drag to reorder, or move sounds between hooks.
+
+**Syncing** - Click **Sync to .claude** to download the active list's sounds to `~/.claude/sounds/`. Files are organized by hook folder:
 
 | Folder | Event |
 |--------|-------|
-| `done` | Claude finishes responding |
 | `start` | Session starts |
 | `userpromptsubmit` | You submit a prompt |
+| `done` | Claude finishes responding |
 | `precompact` | Before context compaction |
+| `permission` | Permission prompt |
+| `question` | Claude asks a question |
+
+**Import/Export** - Export your active list as JSON to share or back up. Import a JSON file to replace the active list's sounds. The export format is backward compatible across versions.
 
 ### 3. Enable the sound watcher
 
-Add to your `~/.zshrc`:
+The app's landing page has a one-click **Setup** button that handles this automatically — it copies the watcher script and adds a `source` line to your shell config.
+
+To set it up manually instead, add to your `~/.zshrc`:
 
 ```bash
 source /path/to/starcraft-claude/sc2-downloader/claude-sounds.zsh
 ```
 
-Restart your terminal or run `source ~/.zshrc`.
+Then restart your terminal or run `source ~/.zshrc`.
 
 ## Usage
 
@@ -74,20 +88,14 @@ export CLAUDE_SOUNDS_DIR="$HOME/.claude/sounds"  # Sound files location
 export CLAUDE_SOUND_VOLUME=50                     # Volume 0-100 (macOS only)
 ```
 
-## Sound Suggestions
-
-| Event | Suggested Unit Quotes |
-|-------|----------------------|
-| Session start | Probe "I am ready", Zealot "My life for Aiur" |
-| Prompt submit | Stalker "I'm ready to go", Sentry "Yes commander" |
-| Task complete | Archon "The merging is complete", Carrier "Carrier has arrived" |
-| Pre-compact | Void Ray "Channel the void", High Templar "My mind is clear" |
-
 ## Testing
 
-Run the server API tests:
-
 ```bash
+# Frontend unit tests (list management)
+cd sc2-downloader/frontend
+npm test
+
+# Server API tests
 cd sc2-downloader/server
 npm test
 ```
@@ -95,17 +103,32 @@ npm test
 For watch mode during development:
 
 ```bash
+cd sc2-downloader/frontend
+npm run test:watch
+
 cd sc2-downloader/server
 npm run test:watch
 ```
+
+## Supported Games
+
+- **StarCraft II** - Protoss, Terran, Zerg
+- **Warcraft II** - Alliance, Horde
+- **Age of Empires III** - European
+
+Switch between games using the dropdown in the sidebar.
 
 ## Project Structure
 
 ```
 starcraft-claude/
-└── sc2-downloader/      # Web app to browse/download SC2 sounds
-    ├── claude-sounds.zsh # Watcher script (source in .zshrc)
-    ├── frontend/        # React + Vite UI
-    ├── server/          # Express backend for MP3 conversion
-    └── scripts/         # Wiki scraper
+└── sc2-downloader/        # Web app to browse/download game sounds
+    ├── claude-sounds.zsh  # Watcher script (source in .zshrc)
+    ├── frontend/          # React + Vite UI
+    │   └── src/
+    │       ├── utils/     # List management logic
+    │       └── __tests__/ # Frontend unit tests
+    ├── server/            # Express backend for MP3 conversion
+    │   └── __tests__/     # Server API tests
+    └── scripts/           # Wiki scraper
 ```
