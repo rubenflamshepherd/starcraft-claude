@@ -15,6 +15,16 @@
   --color-zerg-secondary: #22c55e;
   --color-zerg-dark: #1a1a1e;
   --color-zerg-darker: #0f0f12;
+
+  --color-alliance-primary: #3b82f6;
+  --color-alliance-secondary: #eab308;
+  --color-alliance-dark: #172554;
+  --color-alliance-darker: #0c1529;
+
+  --color-horde-primary: #ef4444;
+  --color-horde-secondary: #a3e635;
+  --color-horde-dark: #2a1215;
+  --color-horde-darker: #160a0c;
 }
 
 :root {

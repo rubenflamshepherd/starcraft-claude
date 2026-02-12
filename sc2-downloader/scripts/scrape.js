@@ -3,6 +3,7 @@ const path = require('path');
 
 const SCRAPERS = {
   sc2: () => require('./scrapers/sc2'),
+  wc2: () => require('./scrapers/wc2'),
 };
 
 const OUTPUT_DIR = path.join(__dirname, '..', 'frontend', 'src', 'data', 'games');

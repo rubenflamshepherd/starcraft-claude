@@ -1,0 +1,1822 @@
+{
+  "factions": {
+    "alliance": {
+      "sections": [
+        {
+          "name": "Units",
+          "units": [
+            {
+              "name": "Peasant",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "Ready to serve.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Psready.wav?b8e5a6"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Yes?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pswhat1.wav?bb2cbb"
+                    },
+                    {
+                      "text": "Milord?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pswhat2.wav?b98558"
+                    },
+                    {
+                      "text": "What is it?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pswhat3.wav?51db39"
+                    },
+                    {
+                      "text": "Hello.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pswhat4.wav?53e673"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Okay.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Psyessr1.wav?1b117e"
+                    },
+                    {
+                      "text": "Right-o.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Psyessr2.wav?abbc5b"
+                    },
+                    {
+                      "text": "Alright.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Psyessr3.wav?ff46e0"
+                    },
+                    {
+                      "text": "Yes, milord.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Psyessr4.wav?b37bae"
+                    }
+                  ]
+                },
+                {
+                  "name": "Job Complete",
+                  "quotes": [
+                    {
+                      "text": "Job's done.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pswrkdon.wav?2b3f5a"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Oh, what?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pspissd1.wav?86a571"
+                    },
+                    {
+                      "text": "Ye... huh?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pspissd2.wav?3b87ec"
+                    },
+                    {
+                      "text": "Now what?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pspissd3.wav?56d112"
+                    },
+                    {
+                      "text": "More work?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pspissd4.wav?c7ffe2"
+                    },
+                    {
+                      "text": "Leave me alone!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pspissd5.wav?f3e0ae"
+                    },
+                    {
+                      "text": "I don't want to do this!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pspissd6.wav?12b1c8"
+                    },
+                    {
+                      "text": "I'm not listening.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pspissd7.wav?354e87"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Footman",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "Awaiting orders. (shared with Ballista)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hready.wav?830a1b"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Your command?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hwhat1.wav?c7ab9e"
+                    },
+                    {
+                      "text": "Your orders?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hwhat2.wav?baae88"
+                    },
+                    {
+                      "text": "Yes, sire?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hwhat3.wav?87b960"
+                    },
+                    {
+                      "text": "Yes?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hwhat4.wav?6d5d57"
+                    },
+                    {
+                      "text": "My lord?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hwhat5.wav?c2d242"
+                    },
+                    {
+                      "text": "At your service.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hwhat6.wav?377891"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Yes.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hyessir1.wav?ef5297"
+                    },
+                    {
+                      "text": "Yes, my lord.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hyessir2.wav?4456c3"
+                    },
+                    {
+                      "text": "As you wish.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hyessir3.wav?cb47fb"
+                    },
+                    {
+                      "text": "At once, sire.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hyessir4.wav?9b0d76"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Make up your mind.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hpissed1.wav?be44f4"
+                    },
+                    {
+                      "text": "Are you still touching me? (from Warcraft: Orcs & Humans)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hpissed2.wav?30b03f"
+                    },
+                    {
+                      "text": "Don't you have a kingdom to run?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hpissed3.wav?1a9d3f"
+                    },
+                    {
+                      "text": "I do have work to do.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hpissed4.wav?248d7b"
+                    },
+                    {
+                      "text": "'Join the army,' they said. (from Asterix)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hpissed5.wav?ca293b"
+                    },
+                    {
+                      "text": "'See the world,' they said. (from Asterix)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hpissed6.wav?fbef5e"
+                    },
+                    {
+                      "text": "I'd rather be sailing.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hpissed7.wav?fb4129"
+                    }
+                  ]
+                },
+                {
+                  "name": "Special",
+                  "quotes": [
+                    {
+                      "text": "You played the shareware, now buy the game. (in the shareware version)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hdempis4.wav?dce0f0"
+                    },
+                    {
+                      "text": "In the retail version I'm much funnier. (in the shareware version)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hdempis5.wav?cefe5f"
+                    },
+                    {
+                      "text": "8-player network and multiplayer capability with full Red Book audio and movies in the full retail version. Buy it now! (in the shareware version)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hdempis6.wav?5ab53d"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Elven Archer/Ranger",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "I come to serve.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Eready.wav?a28813"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Your Eminence?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ewhat1.wav?999144"
+                    },
+                    {
+                      "text": "Exalted one?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ewhat2.wav?41b17f"
+                    },
+                    {
+                      "text": "My sovereign?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ewhat3.wav?c19c6d"
+                    },
+                    {
+                      "text": "Your wish?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ewhat4.wav?5d1e56"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Yes.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Eyessir1.wav?55cbeb"
+                    },
+                    {
+                      "text": "By your command.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Eyessir2.wav?53d796"
+                    },
+                    {
+                      "text": "For the Alliance.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Eyessir3.wav?919da4"
+                    },
+                    {
+                      "text": "Move out.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Eyessir4.wav?4ac512"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "We must take action.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Epissed1.wav?3719cf"
+                    },
+                    {
+                      "text": "Time is of the essence.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Epissed2.wav?f13cc9"
+                    },
+                    {
+                      "text": "Even elder races get tired of waiting.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Epissed3.wav?933dea"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Knight/Paladin",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "Ready to serve, my lord. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knready.wav?651af3"
+                    },
+                    {
+                      "text": "Ready to serve, my lord. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkready.wav?3e9ff2"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Your majesty? /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knwhat1.wav?8f0062"
+                    },
+                    {
+                      "text": "Your majesty? /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkwhat1.wav?388b0a"
+                    },
+                    {
+                      "text": "At your service. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knwhat2.wav?def6f0"
+                    },
+                    {
+                      "text": "At your service. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkwhat2.wav?59d78d"
+                    },
+                    {
+                      "text": "Sire? /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knwhat3.wav?e45087"
+                    },
+                    {
+                      "text": "Sire? /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkwhat3.wav?5cdce9"
+                    },
+                    {
+                      "text": "What ho! /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knwhat4.wav?9a62bf"
+                    },
+                    {
+                      "text": "What ho! /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkwhat4.wav?a80608"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "We move. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knyessr1.wav?17c5e4"
+                    },
+                    {
+                      "text": "We move. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkyessr1.wav?2b2b8d"
+                    },
+                    {
+                      "text": "In your name. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knyessr2.wav?c94367"
+                    },
+                    {
+                      "text": "In your name. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkyessr2.wav?62d8f9"
+                    },
+                    {
+                      "text": "For the king. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knyessr3.wav?b41d36"
+                    },
+                    {
+                      "text": "For the king. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkyessr3.wav?358c9c"
+                    },
+                    {
+                      "text": "Defending your honor. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knyessr4.wav?1d2e5c"
+                    },
+                    {
+                      "text": "Defending your honor. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkyessr4.wav?f24509"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "I need orders. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knpissd1.wav?1053cc"
+                    },
+                    {
+                      "text": "I need orders. /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkpissd1.wav?6b158a"
+                    },
+                    {
+                      "text": "Give me a quest! /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knpissd2.wav?8ae2b5"
+                    },
+                    {
+                      "text": "Give me a quest! /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkpissd2.wav?5d5670"
+                    },
+                    {
+                      "text": "Don't force me to run you through! /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Knpissd3.wav?ac863f"
+                    },
+                    {
+                      "text": "Don't force me to run you through! /",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pkpissd3.wav?bc6164"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Gnomish Flying Machine",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "I've got a flying machine!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gnready.wav?f62f7b"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "(flight sound)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gnyessr1.wav?cec4d0"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Hello, sonny.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gnpissd1.wav?ce2345"
+                    },
+                    {
+                      "text": "Want me to fly?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gnpissd2.wav?6cff64"
+                    },
+                    {
+                      "text": "Are you listening?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gnpissd3.wav?50a127"
+                    },
+                    {
+                      "text": "(distant) I'm flying!...",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gnpissd4.wav?ed407f"
+                    },
+                    {
+                      "text": "(distant) Goodbye!...",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gnpissd5.wav?ee1f4f"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Demolition Squad",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "Dwarves ready.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dwready.wav?9bbd27"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "What do you want?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dwhat1.wav?339c6f"
+                    },
+                    {
+                      "text": "Ach!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dwhat2.wav?5cc178"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Aye, laddy.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dwyessr1.wav?692f87"
+                    },
+                    {
+                      "text": "Okay.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dwyessr2.wav?12d4b5"
+                    },
+                    {
+                      "text": "Alright.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dwyessr3.wav?95e7a3"
+                    },
+                    {
+                      "text": "Move out.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dwyessr4.wav?1bfd09"
+                    },
+                    {
+                      "text": "Yes sir!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dwyessr5.wav?46e39f"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "I love blowin' things up!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dwpissd1.wav?af7461"
+                    },
+                    {
+                      "text": "Bombs are great!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dwpissd2.wav?74226c"
+                    },
+                    {
+                      "text": "Tilt one back with me, dog!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dwpissd3.wav?1b5443"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Mage",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "Who summoned me?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Wzready.wav?563e7c"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "What is it?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Wzwhat1.wav?d74c0c"
+                    },
+                    {
+                      "text": "Do you need assistance?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Wzwhat2.wav?a23efb"
+                    },
+                    {
+                      "text": "Your request?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Wzwhat3.wav?5d8084"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "As you wish.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Wzyessr1.wav?32fbc8"
+                    },
+                    {
+                      "text": "Very well.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Wzyessr2.wav?ac949c"
+                    },
+                    {
+                      "text": "Alright.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Wzyessr3.wav?b4ed96"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "I'm a busy man.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Wzpissd1.wav?7a29a3"
+                    },
+                    {
+                      "text": "Don't anger me.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Wzpissd2.wav?9a7b05"
+                    },
+                    {
+                      "text": "I warned you. (thunder sound)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Wzpissd3.wav?231f9c"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Alliance Ships",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "Captain on the bridge. (from Star Trek)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hshpredy.wav?db7be8"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Aye, captain?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hshpwht1.wav?d1ab1e"
+                    },
+                    {
+                      "text": "Skipper?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hshpwht2.wav?67d017"
+                    },
+                    {
+                      "text": "Set sail?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hshpwht3.wav?ea0046"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Aye, aye, sir.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hshpyes1.wav?e07a2b"
+                    },
+                    {
+                      "text": "Aye, captain.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hshpyes2.wav?58dacb"
+                    },
+                    {
+                      "text": "Underway.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hshpyes3.wav?d2c181"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Stop rocking the boat!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hshppis1.wav?a1790a"
+                    },
+                    {
+                      "text": "You're making me seasick!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hshppis2.wav?4a59b9"
+                    },
+                    {
+                      "text": "(vomiting)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Hshppis3.wav?18d1f2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Heroes",
+          "units": [
+            {
+              "name": "Alleria",
+              "categories": [
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "What?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Alwhat1.wav?a31513"
+                    },
+                    {
+                      "text": "Well?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Alwhat2.wav?54e0c9"
+                    },
+                    {
+                      "text": "Hello?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Alwhat3.wav?97fe00"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Let's go.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Alyessr1.wav?90ef71"
+                    },
+                    {
+                      "text": "Move it.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Alyessr2.wav?46b9bb"
+                    },
+                    {
+                      "text": "Follow me.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Alyessr3.wav?8b6c51"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Excuse me!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Alpissd1.wav?ec08ed"
+                    },
+                    {
+                      "text": "You never touch the other elves like that.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Alpissd2.wav?a7750c"
+                    },
+                    {
+                      "text": "Do that again and you'll pull back a stump!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Alpissd3.wav?ed424d"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Danath",
+              "categories": [
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "What?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dnwhat1.wav?c1f29b"
+                    },
+                    {
+                      "text": "Need something?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dnwhat2.wav?a76bad"
+                    },
+                    {
+                      "text": "Bring it on.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dnwhat3.wav?644eed"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Follow me.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dnyessr1.wav?5c8eee"
+                    },
+                    {
+                      "text": "Step aside, junior.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dnyessr2.wav?ce15e9"
+                    },
+                    {
+                      "text": "Draw steel, boys.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dnyessr3.wav?9e844d"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "You talkin' to me? (from Taxi Driver)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dnpisd1.wav?616df1"
+                    },
+                    {
+                      "text": "Hands off, grubber.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dnpisd2.wav?5a4250"
+                    },
+                    {
+                      "text": "Don't waste my time.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dnpisd3.wav?106904"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Khadgar",
+              "categories": [
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Hello?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Khwhat1.wav?654a8d"
+                    },
+                    {
+                      "text": "Who's there?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Khwhat2.wav?8e530b"
+                    },
+                    {
+                      "text": "Yes, what is it?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Khwhat3.wav?5497ff"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "If I must.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Khyessr1.wav?118366"
+                    },
+                    {
+                      "text": "Alright, alright.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Khyessr2.wav?d95539"
+                    },
+                    {
+                      "text": "Yes.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Khyessr3.wav?b562d6"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Do you know who I am?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Khpissd1.wav?f1c920"
+                    },
+                    {
+                      "text": "I'm very busy.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Khpissd2.wav?270c80"
+                    },
+                    {
+                      "text": "Are you still here?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Khpissd3.wav?9a9915"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Kurdran",
+              "categories": [
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "What?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kuwhat1.wav?2d862a"
+                    },
+                    {
+                      "text": "Aye?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kuwhat2.wav?7ca9d6"
+                    },
+                    {
+                      "text": "Yes, lad?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kuwhat3.wav?d4cbd9"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Alright.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kuyessr1.wav?b9db13"
+                    },
+                    {
+                      "text": "Ach, okay.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kuyessr2.wav?e87769"
+                    },
+                    {
+                      "text": "Yes, sir.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kuyessr3.wav?6212d4"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "I'll fling a hammer at you!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kupissd1.wav?56c9ff"
+                    },
+                    {
+                      "text": "You got a belly full of haggis.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kupissd2.wav?a59e64"
+                    },
+                    {
+                      "text": "Ach, there's no hope for this lad.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kupissd3.wav?7dba03"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Turalyon",
+              "categories": [
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "I am at your service.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tuwhat1.wav?7d2a2e"
+                    },
+                    {
+                      "text": "Command me.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tuwhat2.wav?54b3cd"
+                    },
+                    {
+                      "text": "Orders, sire?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tuwhat3.wav?875f2c"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "A noble quest.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tuyessr1.wav?9a568f"
+                    },
+                    {
+                      "text": "For Lothar.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tuyessr2.wav?acaff4"
+                    },
+                    {
+                      "text": "Of course, my king.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tuyessr3.wav?db1376"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Why must you torment me?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tupissd1.wav?500c85"
+                    },
+                    {
+                      "text": "You think Lothar's death was my fault, don't you?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tupissd2.wav?8d3a7d"
+                    },
+                    {
+                      "text": "I challenge you, heathen!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tupissd3.wav?375b55"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "horde": {
+      "sections": [
+        {
+          "name": "Units",
+          "units": [
+            {
+              "name": "Peon/Grunt",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "Ready to work. (Peon)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Pnready.wav?8a8bb3"
+                    },
+                    {
+                      "text": "Your command, master. (Grunt and Catapult)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oready.wav?e51c4a"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Itog.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Owhat1.wav?918158"
+                    },
+                    {
+                      "text": "Zog tog.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Owhat2.wav?816e6f"
+                    },
+                    {
+                      "text": "Glor'duk.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Owhat3.wav?eca6b9"
+                    },
+                    {
+                      "text": "Urr?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Owhat4.wav?6cd67a"
+                    },
+                    {
+                      "text": "Ur-ur-ur!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Owhat5.wav?3dbdbc"
+                    },
+                    {
+                      "text": "Huh?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Owhat6.wav?bec346"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Zug zug. (from Caveman)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oyessir1.wav?f6e6c1"
+                    },
+                    {
+                      "text": "Dabu.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oyessir2.wav?12feea"
+                    },
+                    {
+                      "text": "Lok'tar.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oyessir3.wav?bb4160"
+                    },
+                    {
+                      "text": "Suobu.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oyessir4.wav?a786e8"
+                    }
+                  ]
+                },
+                {
+                  "name": "Job Complete",
+                  "quotes": [
+                    {
+                      "text": "Work complete. (rerecorded line from Warcraft I)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Owrkdone.wav?d2fd38"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Whaaat?!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Opissed1.wav?35f3af"
+                    },
+                    {
+                      "text": "Look out!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Opissed2.wav?a6fc3b"
+                    },
+                    {
+                      "text": "Missed me!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Opissed3.wav?7d9ec7"
+                    },
+                    {
+                      "text": "Hee hee hee! That tickles.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Opissed4.wav?e9285b"
+                    },
+                    {
+                      "text": "I would not do such things if I were you.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Opissed5.wav?94dcb0"
+                    },
+                    {
+                      "text": "My tummy feels funny.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Opissed6.wav?b85d5f"
+                    },
+                    {
+                      "text": "(belches) 'Scuse me.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Opissed7.wav?df07f0"
+                    }
+                  ]
+                },
+                {
+                  "name": "Special",
+                  "quotes": [
+                    {
+                      "text": "You're good looking for a human. (in the shareware version)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odempis4.wav?7a7746"
+                    },
+                    {
+                      "text": "You buy retail version, or I'll chop you into little bits! [sic] (in the shareware version)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odempis5.wav?f7df37"
+                    },
+                    {
+                      "text": "You buy full version? Pleeease? (in the shareware version)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odempis6.wav?555633"
+                    },
+                    {
+                      "text": "You go buy now or I sing. (sings) (in the shareware version)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odempis7.wav?ec87fd"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Troll Axethrower/Berserker",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "New troll here!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Trready.wav?501bad"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Ju call me?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Trwhat1.wav?f113b9"
+                    },
+                    {
+                      "text": "Ju want axe?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Trwhat2.wav?e51eeb"
+                    },
+                    {
+                      "text": "What ju wan'me kill?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Trwhat3.wav?73069b"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Okay.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tryessr1.wav?ec191e"
+                    },
+                    {
+                      "text": "Alright.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tryessr2.wav?24d4c4"
+                    },
+                    {
+                      "text": "You da boss.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tryessr3.wav?836a6e"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "I got axe for you!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Trpissd1.wav?307414"
+                    },
+                    {
+                      "text": "(muttered curses)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Trpissd2.wav?3d985f"
+                    },
+                    {
+                      "text": "Say hello to my little friend! (from Scarface)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Trpissd3.wav?fb3030"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Ogre",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "We're ready, master.I'm not ready.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogready.wav?45a65d"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Huh?What?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogwhat1.wav?92abb0"
+                    },
+                    {
+                      "text": "What?Huh?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogwhat2.wav?b0a638"
+                    },
+                    {
+                      "text": "Yes?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogwhat3.wav?a96326"
+                    },
+                    {
+                      "text": "Master?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogwhat4.wav?7bbc3e"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Okay.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogyessr1.wav?c84e28"
+                    },
+                    {
+                      "text": "Yes, master.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogyessr2.wav?9d0dff"
+                    },
+                    {
+                      "text": "Alright.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogyessr3.wav?22ece5"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Yes, master.I don't want to!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogpissd1.wav?d815a2"
+                    },
+                    {
+                      "text": "All right.Now I'm hungry!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogpissd2.wav?db5ac0"
+                    },
+                    {
+                      "text": "This way.No, that way!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogpissd3.wav?e86cb8"
+                    },
+                    {
+                      "text": "(burp)He did it!No, he did it!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogpissd4.wav?eb4e21"
+                    },
+                    {
+                      "text": "(fart)(both laugh)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ogpissd5.wav?e03dc4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Ogre-Mage",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "We're ready, master.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Omready.wav?655fe2"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Yes, master?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Omwhat1.wav?3eaa2a"
+                    },
+                    {
+                      "text": "What?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Omwhat2.wav?49d84c"
+                    },
+                    {
+                      "text": "Yes?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Omwhat3.wav?f09531"
+                    },
+                    {
+                      "text": "What is it?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Omwhat4.wav?b122d0"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Yes, master.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Omyessr1.wav?ced301"
+                    },
+                    {
+                      "text": "Of course.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Omyessr2.wav?8e2c36"
+                    },
+                    {
+                      "text": "Right away.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Omyessr3.wav?9e955c"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "(burp) We did it.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ompissd1.wav?dcc7e5"
+                    },
+                    {
+                      "text": "We're not brainless anymore.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ompissd2.wav?7fd400"
+                    },
+                    {
+                      "text": "I've got the brain.Nuh-uh!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Ompissd3.wav?4bff36"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Goblin Zeppelin",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "Here I am.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gbready.wav?c64e65"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "(flight sound)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gbyessr1.wav?805418"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "I can see my house!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gbpissd1.wav?8b947c"
+                    },
+                    {
+                      "text": "I wish I had a weapon!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gbpissd2.wav?f9d1c9"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Death Knight",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "I'm alive!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dkready.wav?7092f2"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Yes?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dkwhat1.wav?4ace56"
+                    },
+                    {
+                      "text": "Make it quick.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dkwhat2.wav?95a3ba"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Of course... master...",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dkyessr1.wav?ef92c5"
+                    },
+                    {
+                      "text": "Very well.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dkyessr2.wav?edb924"
+                    },
+                    {
+                      "text": "(growls)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dkyessr3.wav?5fcf2c"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "I'm growing impatient.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dkpissd1.wav?3aa2e8"
+                    },
+                    {
+                      "text": "Don't push it.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dkpissd2.wav?f8e6d4"
+                    },
+                    {
+                      "text": "When my work is finished, I'm coming back for you.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dkpissd3.wav?8cd494"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Goblin Sappers",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "We're ready!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Goready.wav?311e17"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "What?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gowhat1.wav?365d7f"
+                    },
+                    {
+                      "text": "Yes?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gowhat2.wav?6e026e"
+                    },
+                    {
+                      "text": "Who is it?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gowhat3.wav?e3af56"
+                    },
+                    {
+                      "text": "Hello?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gowhat4.wav?fcabfd"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Okay.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Goyessr1.wav?d92a16"
+                    },
+                    {
+                      "text": "Certainly.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Goyessr2.wav?256273"
+                    },
+                    {
+                      "text": "Yes, boss.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Goyessr3.wav?13faef"
+                    },
+                    {
+                      "text": "All right.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Goyessr4.wav?70380f"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "We've got explosives!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gopissd1.wav?968c24"
+                    },
+                    {
+                      "text": "Kabooom!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gopissd2.wav?a9d0b2"
+                    },
+                    {
+                      "text": "(singing) Ooooh, it's beautiful!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gopissd3.wav?de7b86"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Horde Ships",
+              "categories": [
+                {
+                  "name": "Ready",
+                  "quotes": [
+                    {
+                      "text": "Done building ship.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oshpredy.wav?de9fb7"
+                    }
+                  ]
+                },
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Arg?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oshpwht1.wav?d52b21"
+                    },
+                    {
+                      "text": "Aye, matey?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oshpwht2.wav?cf6022"
+                    },
+                    {
+                      "text": "Yes, captain?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oshpwht3.wav?f6e259"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Ahoy.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oshpyes1.wav?63777a"
+                    },
+                    {
+                      "text": "I would love to.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oshpyes2.wav?eb46d8"
+                    },
+                    {
+                      "text": "You're the captain.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oshpyes3.wav?7085cb"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Crowd: Yo ho!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oshppis1.wav?ddbbd0"
+                    },
+                    {
+                      "text": "Who wants to sing?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oshppis2.wav?d50237"
+                    },
+                    {
+                      "text": "(orcs singing)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Oshppis3.wav?62da35"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Heroes",
+          "units": [
+            {
+              "name": "Deathwing",
+              "categories": [
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "What?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dewhat1.wav?fd59ad"
+                    },
+                    {
+                      "text": "Huhhh?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dewhat2.wav?4584e1"
+                    },
+                    {
+                      "text": "I'm waiting.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Dewhat3.wav?ad5dd6"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Yes.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Deyessr1.wav?6170cb"
+                    },
+                    {
+                      "text": "(hisses)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Deyessr2.wav?c1f2ac"
+                    },
+                    {
+                      "text": "Alright.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Deyessr3.wav?69ca4c"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Do you like fire?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Depissd1.wav?541370"
+                    },
+                    {
+                      "text": "I'm full of it!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Depissd2.wav?4159e6"
+                    },
+                    {
+                      "text": "(breathes fire)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Depissd3.wav?67dc87"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Dentarg",
+              "categories": [
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Hmm?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odwhat1.wav?9ea9f4"
+                    },
+                    {
+                      "text": "What do you want?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odwhat2.wav?f2f84e"
+                    },
+                    {
+                      "text": "Yes?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odwhat3.wav?e26059"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "At once, my master.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odyessr1.wav?63ba62"
+                    },
+                    {
+                      "text": "For Ner'zhul.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odyessr2.wav?b883a0"
+                    },
+                    {
+                      "text": "We're on our way.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odyessr3.wav?fe0236"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "We don't understand.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odpissd1.wav?6e5a04"
+                    },
+                    {
+                      "text": "Are you opposing Shadowmoon?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odpissd2.wav?949315"
+                    },
+                    {
+                      "text": "Ner'zhul will have your head.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Odpissd3.wav?b70e92"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Grom Hellscream",
+              "categories": [
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Whaat?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Grwhat1.wav?7c0c33"
+                    },
+                    {
+                      "text": "Tell me what to do!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Grwhat2.wav?b11747"
+                    },
+                    {
+                      "text": "Yeess?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Grwhat3.wav?8c6b92"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Slice and dice!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gryessr1.wav?889275"
+                    },
+                    {
+                      "text": "Take it!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gryessr2.wav?b62adb"
+                    },
+                    {
+                      "text": "Time to die!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Gryessr3.wav?131935"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Welcome to my nightmare! (from \"Welcome to My Nightmare\" by Alice Cooper)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Grpissd1.wav?6c9d6a"
+                    },
+                    {
+                      "text": "I am Iron Man! (from \"Iron Man\" by Black Sabbath)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Grpissd2.wav?4d500a"
+                    },
+                    {
+                      "text": "Feelings! (from \"Feelings\" by Morris Albert)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Grpissd3.wav?19d210"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Kargath Bladefist",
+              "categories": [
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Need a hand?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kawhat1.wav?bc8120"
+                    },
+                    {
+                      "text": "Yeah?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kawhat2.wav?875a72"
+                    },
+                    {
+                      "text": "Huh?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kawhat3.wav?789def"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "I'm on it.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kayessr1.wav?baa171"
+                    },
+                    {
+                      "text": "Chop chop!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kayessr2.wav?8b9ddb"
+                    },
+                    {
+                      "text": "Yep.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kayessr3.wav?7cb5f7"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "Stop it!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kapissd1.wav?4529a6"
+                    },
+                    {
+                      "text": "You...!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kapissd2.wav?17697e"
+                    },
+                    {
+                      "text": "Do you feel lucky, punk? (from Dirty Harry)",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Kapissd3.wav?5184c6"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Teron Gorefiend",
+              "categories": [
+                {
+                  "name": "What",
+                  "quotes": [
+                    {
+                      "text": "Greetings.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tewhat1.wav?4f08b0"
+                    },
+                    {
+                      "text": "Yeess?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tewhat2.wav?941fdb"
+                    },
+                    {
+                      "text": "What?",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tewhat3.wav?a97cae"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yes",
+                  "quotes": [
+                    {
+                      "text": "Immediately.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Teyessr1.wav?1bb5c1"
+                    },
+                    {
+                      "text": "Whatever you wish.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Teyessr2.wav?c5cf65"
+                    },
+                    {
+                      "text": "I'd be delighted!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Teyessr3.wav?ed4a7b"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pissed",
+                  "quotes": [
+                    {
+                      "text": "That doesn't hurt.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tepissd1.wav?e8fe09"
+                    },
+                    {
+                      "text": "This is the reason I ended it all.",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tepissd2.wav?9bc0bc"
+                    },
+                    {
+                      "text": "Stop that incessant clicking!",
+                      "audioUrl": "https://warcraft.wiki.gg/images/Tepissd3.wav?586d3d"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

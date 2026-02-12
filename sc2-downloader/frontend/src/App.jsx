@@ -22,6 +22,7 @@ function getInitialRecommendedSetup() {
 // Map of lazy-loading functions for each game's data file
 const gameDataLoaders = {
   sc2: () => import('./data/games/sc2.json'),
+  wc2: () => import('./data/games/wc2.json'),
 };
 
 function App() {

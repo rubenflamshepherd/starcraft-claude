@@ -37,6 +37,34 @@
         }
       ],
       "attribution": "Audio from StarCraft Wiki"
+    },
+    {
+      "id": "wc2",
+      "name": "Warcraft II",
+      "dataFile": "wc2.json",
+      "factions": [
+        {
+          "id": "alliance",
+          "name": "Alliance",
+          "colors": {
+            "primary": "#3b82f6",
+            "secondary": "#eab308",
+            "dark": "#172554",
+            "darker": "#0c1529"
+          }
+        },
+        {
+          "id": "horde",
+          "name": "Horde",
+          "colors": {
+            "primary": "#ef4444",
+            "secondary": "#a3e635",
+            "dark": "#2a1215",
+            "darker": "#160a0c"
+          }
+        }
+      ],
+      "attribution": "Audio from Warcraft Wiki"
     }
   ]
 }

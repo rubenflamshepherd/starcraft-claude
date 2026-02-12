@@ -258,6 +258,18 @@
           "race": "protoss",
           "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/73/Zealot_What02.ogg/revision/latest?cb=20211026183407",
           "game": "sc2"
+        },
+        {
+          "text": "Transmit orders.",
+          "unit": "Science Vessel",
+          "race": "terran",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/72/ScienceVessel_What01.ogg/revision/latest?cb=20211010191435"
+        },
+        {
+          "text": "Command authority registered.",
+          "unit": "Raven",
+          "race": "terran",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/6/62/Raven_Yes04.ogg/revision/latest?cb=20211007173930"
         }
       ]
     },
