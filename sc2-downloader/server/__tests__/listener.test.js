@@ -15,9 +15,12 @@ vi.mock('child_process', () => ({ execSync: mockExecSync }));
 
 let tempHome;
 let app;
+let originalShell;
 
 beforeEach(async () => {
   tempHome = createTempHome();
+  originalShell = process.env.SHELL;
+  process.env.SHELL = '/bin/zsh';
   vi.stubGlobal('fetch', vi.fn());
   vi.resetModules();
   const mod = await import('../app.js');
@@ -26,6 +29,7 @@ beforeEach(async () => {
 
 afterEach(() => {
   cleanupTempHome(tempHome);
+  process.env.SHELL = originalShell;
   vi.restoreAllMocks();
 });
 
