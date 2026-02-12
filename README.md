@@ -24,59 +24,7 @@ Claude Code [hooks](https://docs.anthropic.com/en/docs/claude-code/hooks) trigge
 brew install fswatch ffmpeg
 ```
 
-### 2. Configure Claude Code hooks
-
-Add this to `~/.claude/settings.json`:
-
-```json
-{
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "startup|clear",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "touch ~/.claude/.claude-start"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "touch ~/.claude/.claude-prompt"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "touch ~/.claude/.claude-done"
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "touch ~/.claude/.claude-compact"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-### 3. Download StarCraft sounds
+### 2. Download StarCraft sounds
 
 ```bash
 cd sc2-downloader
@@ -93,7 +41,7 @@ Open http://localhost:5173, browse units, and select quotes. Use the dropdown to
 | `userpromptsubmit` | You submit a prompt |
 | `precompact` | Before context compaction |
 
-### 4. Enable the sound watcher
+### 3. Enable the sound watcher
 
 Add to your `~/.zshrc`:
 
@@ -134,6 +82,22 @@ export CLAUDE_SOUND_VOLUME=50                     # Volume 0-100 (macOS only)
 | Prompt submit | Stalker "I'm ready to go", Sentry "Yes commander" |
 | Task complete | Archon "The merging is complete", Carrier "Carrier has arrived" |
 | Pre-compact | Void Ray "Channel the void", High Templar "My mind is clear" |
+
+## Testing
+
+Run the server API tests:
+
+```bash
+cd sc2-downloader/server
+npm test
+```
+
+For watch mode during development:
+
+```bash
+cd sc2-downloader/server
+npm run test:watch
+```
 
 ## Project Structure
 
