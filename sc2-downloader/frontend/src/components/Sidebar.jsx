@@ -1,76 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { buildViewConfig, getFactionStyles } from '../utils/factionStyles';
 
-const viewConfig = {
-  home: {
-    label: 'Home',
-    bgClass: 'bg-gray-900',
-    borderClass: 'border-gray-700/20',
-    primaryClass: 'text-gray-200',
-    inputBg: 'bg-gray-950',
-    inputBorder: 'border-gray-600/30',
-    inputFocus: 'focus:border-gray-400',
-    selectedBg: 'bg-gray-600/20',
-  },
-  all: {
-    label: 'All',
-    bgClass: 'bg-gray-900',
-    borderClass: 'border-gray-700/20',
-    primaryClass: 'text-gray-200',
-    inputBg: 'bg-gray-950',
-    inputBorder: 'border-gray-600/30',
-    inputFocus: 'focus:border-gray-400',
-    selectedBg: 'bg-gray-600/20',
-  },
-  protoss: {
-    label: 'Protoss',
-    bgClass: 'bg-protoss-dark',
-    borderClass: 'border-protoss-primary/20',
-    primaryClass: 'text-protoss-primary',
-    inputBg: 'bg-protoss-darker',
-    inputBorder: 'border-protoss-primary/30',
-    inputFocus: 'focus:border-protoss-primary',
-    selectedBg: 'bg-protoss-primary/20',
-  },
-  terran: {
-    label: 'Terran',
-    bgClass: 'bg-terran-dark',
-    borderClass: 'border-terran-primary/20',
-    primaryClass: 'text-terran-primary',
-    inputBg: 'bg-terran-darker',
-    inputBorder: 'border-terran-primary/30',
-    inputFocus: 'focus:border-terran-primary',
-    selectedBg: 'bg-terran-primary/20',
-  },
-  zerg: {
-    label: 'Zerg',
-    bgClass: 'bg-zerg-dark',
-    borderClass: 'border-zerg-primary/20',
-    primaryClass: 'text-zerg-primary',
-    inputBg: 'bg-zerg-darker',
-    inputBorder: 'border-zerg-primary/30',
-    inputFocus: 'focus:border-zerg-primary',
-    selectedBg: 'bg-zerg-primary/20',
-  },
-  recommended: {
-    label: 'Setup',
-    bgClass: 'bg-gray-900',
-    borderClass: 'border-amber-500/20',
-    primaryClass: 'text-amber-400',
-    inputBg: 'bg-gray-950',
-    inputBorder: 'border-amber-500/30',
-    inputFocus: 'focus:border-amber-400',
-    selectedBg: 'bg-amber-500/20',
-  },
-};
-
-export default function Sidebar({ sections, selectedUnit, onSelectUnit, selectedView, onViewChange, views, quoteSearchQuery, onQuoteSearchChange, recommendedSetup }) {
+export default function Sidebar({ sections, selectedUnit, onSelectUnit, selectedView, onViewChange, views, quoteSearchQuery, onQuoteSearchChange, recommendedSetup, selectedGame, games, onGameChange }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedSections, setExpandedSections] = useState({});
 
   const isHomeView = selectedView === 'home';
   const isRecommendedView = selectedView === 'recommended';
-  const config = viewConfig[selectedView] || viewConfig.protoss;
-  const races = views.filter(v => v !== 'recommended' && v !== 'home');
+
+  // Build viewConfig dynamically from the selected game's factions
+  const viewConfig = useMemo(() => buildViewConfig(selectedGame), [selectedGame]);
+
+  const config = viewConfig[selectedView] || viewConfig[selectedGame.factions[0]?.id] || viewConfig.home;
+  const factions = views.filter(v => v !== 'recommended' && v !== 'home');
 
   useEffect(() => {
     if (isRecommendedView && recommendedSetup?.hooks) {
@@ -98,10 +40,26 @@ export default function Sidebar({ sections, selectedUnit, onSelectUnit, selected
     )
   })).filter(section => section.units.length > 0);
 
+  const hasMultipleGames = games.length > 1;
+
   return (
     <div className={`w-72 ${config.bgClass} border-r ${config.borderClass} flex flex-col h-screen`}>
       <div className={`p-4 border-b ${config.borderClass}`}>
-        <h1 className={`text-lg font-bold ${config.primaryClass} mb-3`}>SC2 Quotes Browser</h1>
+        <h1 className={`text-lg font-bold ${config.primaryClass} mb-3`}>
+          {selectedGame.name} Quotes
+        </h1>
+
+        {hasMultipleGames && (
+          <select
+            value={selectedGame.id}
+            onChange={(e) => onGameChange(e.target.value)}
+            className={`w-full px-3 py-2 ${config.inputBg} border ${config.inputBorder} rounded text-sm text-gray-200 focus:outline-none ${config.inputFocus} mb-3`}
+          >
+            {games.map(game => (
+              <option key={game.id} value={game.id}>{game.name}</option>
+            ))}
+          </select>
+        )}
 
         <div className="flex gap-1 mb-2">
           <button
@@ -117,19 +75,22 @@ export default function Sidebar({ sections, selectedUnit, onSelectUnit, selected
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
           </button>
-          {races.map((race) => (
-            <button
-              key={race}
-              onClick={() => onViewChange(race)}
-              className={`flex-1 py-1.5 px-2 text-sm font-medium rounded transition-colors capitalize ${
-                selectedView === race
-                  ? `${viewConfig[race].selectedBg} ${viewConfig[race].primaryClass}`
-                  : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
-              }`}
-            >
-              {viewConfig[race]?.label || race}
-            </button>
-          ))}
+          {factions.map((factionId) => {
+            const factionConfig = viewConfig[factionId];
+            return (
+              <button
+                key={factionId}
+                onClick={() => onViewChange(factionId)}
+                className={`flex-1 py-1.5 px-2 text-sm font-medium rounded transition-colors capitalize ${
+                  selectedView === factionId
+                    ? `${factionConfig?.selectedBg || ''} ${factionConfig?.primaryClass || ''}`
+                    : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
+                }`}
+              >
+                {factionConfig?.label || factionId}
+              </button>
+            );
+          })}
         </div>
 
         <button
@@ -170,7 +131,7 @@ export default function Sidebar({ sections, selectedUnit, onSelectUnit, selected
         {isHomeView ? (
           // Home View - Show quick navigation hints
           <div className="p-4 text-center text-gray-500">
-            <p className="text-sm mb-2">Select a race to browse quotes</p>
+            <p className="text-sm mb-2">Select a faction to browse quotes</p>
             <p className="text-xs">or check out the Recommended Setup</p>
           </div>
         ) : isRecommendedView ? (
@@ -199,13 +160,13 @@ export default function Sidebar({ sections, selectedUnit, onSelectUnit, selected
                 <div className="ml-4">
                   <p className="text-xs text-gray-500 px-2 py-1 mb-1">{hook.description}</p>
                   {hook.recommendations.map((rec, idx) => {
-                    const recConfig = viewConfig[rec.race] || viewConfig.protoss;
+                    const recStyles = getFactionStyles(rec.race);
                     return (
                       <div
                         key={`${hook.name}-${idx}`}
                         className="py-1.5 px-2 text-sm"
                       >
-                        <span className={`block truncate ${recConfig.primaryClass}`}>{rec.text}</span>
+                        <span className={`block truncate ${recStyles.primaryClass}`}>{rec.text}</span>
                         <span className="text-xs text-gray-500">{rec.unit}</span>
                       </div>
                     );
@@ -215,7 +176,7 @@ export default function Sidebar({ sections, selectedUnit, onSelectUnit, selected
             </div>
           ))
         ) : (
-          // Regular race view - Show units
+          // Regular faction view - Show units
           filteredSections.map((section) => (
             <div key={section.name} className="mb-2">
               <button
@@ -236,14 +197,14 @@ export default function Sidebar({ sections, selectedUnit, onSelectUnit, selected
               {expandedSections[section.name] && (
                 <div className="ml-4">
                   {section.units.map((unit) => {
-                    const unitConfig = unit.race ? viewConfig[unit.race] : config;
+                    const unitStyles = unit.race ? getFactionStyles(unit.race) : config;
                     return (
                       <button
                         key={`${section.name}-${unit.name}`}
                         onClick={() => onSelectUnit(unit)}
                         className={`w-full text-left py-1.5 px-2 rounded text-sm transition-colors ${
                           selectedUnit?.name === unit.name
-                            ? `${unitConfig.selectedBg} ${unitConfig.primaryClass}`
+                            ? `${unitStyles.selectedBg} ${unitStyles.primaryClass}`
                             : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
                         }`}
                       >
@@ -259,7 +220,7 @@ export default function Sidebar({ sections, selectedUnit, onSelectUnit, selected
       </div>
 
       <div className={`p-3 border-t ${config.borderClass} text-xs text-gray-500`}>
-        Audio from StarCraft Wiki
+        {selectedGame.attribution}
       </div>
     </div>
   );

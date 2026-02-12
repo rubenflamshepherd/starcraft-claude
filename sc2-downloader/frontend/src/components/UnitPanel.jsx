@@ -9,6 +9,7 @@ import { SortableContext, sortableKeyboardCoordinates, useSortable, verticalList
 import { CSS } from '@dnd-kit/utilities';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import { getFactionStyles } from '../utils/factionStyles';
 
 const HOOK_TO_FOLDER = {
   SessionStart: 'start',
@@ -41,11 +42,7 @@ function SortableRecommendation({ rec, idx, hook, hookNames, onMoveRecommendatio
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
           </svg>
         </button>
-        <span className={`text-xs px-2 py-0.5 rounded ${
-          rec.race === 'protoss' ? 'bg-protoss-primary/20 text-protoss-primary' :
-          rec.race === 'terran' ? 'bg-terran-primary/20 text-terran-primary' :
-          'bg-zerg-primary/20 text-zerg-primary'
-        }`}>
+        <span className={`text-xs px-2 py-0.5 rounded ${getFactionStyles(rec.race).badgeBg} ${getFactionStyles(rec.race).primaryClass}`}>
           {rec.unit}
         </span>
         <div className="ml-auto flex items-center gap-1 opacity-0 group-hover/rec:opacity-100 transition-opacity">
@@ -80,10 +77,10 @@ function SortableRecommendation({ rec, idx, hook, hookNames, onMoveRecommendatio
   );
 }
 
-export default function UnitPanel({ unit, race = 'protoss', sections = [], quoteSearchQuery = '', isHomeView = false, isRecommendedView = false, recommendedSetup = null, onRemoveRecommendation = null, onMoveRecommendation = null, onReorderRecommendations = null, onAddRecommendation = null, onImportSetup = null, onNavigate = null }) {
+export default function UnitPanel({ unit, race = 'protoss', sections = [], quoteSearchQuery = '', isHomeView = false, isRecommendedView = false, recommendedSetup = null, onRemoveRecommendation = null, onMoveRecommendation = null, onReorderRecommendations = null, onAddRecommendation = null, onImportSetup = null, onNavigate = null, selectedGame = null }) {
   // Use unit's race for styling when available (for "all" tab), otherwise use selected race
   const effectiveRace = unit?.race || race;
-  const primaryClass = effectiveRace === 'terran' ? 'text-terran-primary' : effectiveRace === 'zerg' ? 'text-zerg-primary' : 'text-protoss-primary';
+  const primaryClass = getFactionStyles(effectiveRace).primaryClass;
 
   // Drag and drop sensors (must be at top level)
   const sensors = useSensors(
@@ -426,6 +423,7 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
             unitName={unit.name}
             recommendedSetup={recommendedSetup}
             onAddRecommendation={onAddRecommendation}
+            game={selectedGame?.id}
           />
         ))}
       </div>

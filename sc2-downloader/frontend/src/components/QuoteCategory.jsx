@@ -1,15 +1,17 @@
 import { useState, useMemo } from 'react';
 import QuoteLine from './QuoteLine';
 import { useSelection } from '../contexts/SelectionContext';
+import { getFactionStyles } from '../utils/factionStyles';
 
-export default function QuoteCategory({ category, race = 'protoss', unitName = '', recommendedSetup = null, onAddRecommendation = null }) {
+export default function QuoteCategory({ category, race = 'protoss', unitName = '', recommendedSetup = null, onAddRecommendation = null, game = 'sc2' }) {
   const [isExpanded, setIsExpanded] = useState(true);
   const { isSelected, selectAll, deselectAll, selectedCount } = useSelection();
 
-  const primaryClass = race === 'terran' ? 'text-terran-primary' : race === 'zerg' ? 'text-zerg-primary' : 'text-protoss-primary';
-  const borderClass = race === 'terran' ? 'border-terran-primary/20' : race === 'zerg' ? 'border-zerg-primary/20' : 'border-protoss-primary/20';
-  const secondaryBg = race === 'terran' ? 'bg-terran-secondary/20' : race === 'zerg' ? 'bg-zerg-secondary/20' : 'bg-protoss-secondary/20';
-  const secondaryHoverBg = race === 'terran' ? 'hover:bg-terran-secondary/40' : race === 'zerg' ? 'hover:bg-zerg-secondary/40' : 'hover:bg-protoss-secondary/40';
+  const styles = getFactionStyles(race);
+  const primaryClass = styles.primaryClass;
+  const borderClass = styles.borderClass;
+  const secondaryBg = styles.secondaryBg;
+  const secondaryHoverBg = styles.secondaryHover;
 
   const allSelected = useMemo(() => {
     return category.quotes.length > 0 && category.quotes.every(q => isSelected(q));
@@ -65,6 +67,7 @@ export default function QuoteCategory({ category, race = 'protoss', unitName = '
               categoryName={category.name}
               recommendedSetup={recommendedSetup}
               onAddRecommendation={onAddRecommendation}
+              game={game}
             />
           ))}
         </div>

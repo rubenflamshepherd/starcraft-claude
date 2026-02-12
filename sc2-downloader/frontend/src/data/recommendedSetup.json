@@ -5,124 +5,46 @@
       "description": "When Claude Code starts or resumes a session",
       "recommendations": [
         {
-          "text": "Consciousness awakened.",
-          "unit": "Disruptor",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/f/fb/RobotPusher_Pusher_040.ogg/revision/latest?cb=20211013163120"
-        },
-        {
-          "text": "Oracle perceiving.",
-          "unit": "Oracle",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/f/fa/ZVO_ProtossOracle_ProtossFlyingCaster_006.ogg/revision/latest?cb=20211021144720"
-        },
-        {
           "text": "We feel your presence.",
           "unit": "Arbiter",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/e/ea/Arbiter_What00.ogg/revision/latest?cb=20211026214520"
-        },
-        {
-          "text": "Give me purpose.",
-          "unit": "Destroyer",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/f/fe/Destroyer_What03.ogg/revision/latest?cb=20211028173944"
-        },
-        {
-          "text": "State your request.",
-          "unit": "Alarak",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/0/00/Alarak_What06.ogg/revision/latest?cb=20211128172246"
-        },
-        {
-          "text": "You call upon me?",
-          "unit": "Annihilator",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/5/52/Annihilator_What06.ogg/revision/latest?cb=20211026185804"
-        },
-        {
-          "text": "Our expertise is yours.",
-          "unit": "Arbiter",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/c/c7/Arbiter_What07.ogg/revision/latest?cb=20211026214526"
-        },
-        {
-          "text": "We shall lend our power.",
-          "unit": "Arbiter",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/2/27/Arbiter_Yes04.ogg/revision/latest?cb=20211026214530"
-        },
-        {
-          "text": "May I be of service?",
-          "unit": "Corsair (Legacy of the Void)",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/8f/Corsair_What03.ogg/revision/latest?cb=20211028155650"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/e/ea/Arbiter_What00.ogg/revision/latest?cb=20211026214520",
+          "game": "sc2"
         },
         {
           "text": "You seek our service?",
           "unit": "Dark Templar",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/7c/DarkTemplar_What04.ogg/revision/latest?cb=20211013145629"
-        },
-        {
-          "text": "What would you ask of us?",
-          "unit": "Dark Templar",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/93/DarkTemplar_What06.ogg/revision/latest?cb=20211013145632"
-        },
-        {
-          "text": "I have returned.",
-          "unit": "Dragoon",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/d/d3/DragoonVoid_Ready00.ogg/revision/latest?cb=20211028180850"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/7c/DarkTemplar_What04.ogg/revision/latest?cb=20211013145629",
+          "game": "sc2"
         },
         {
           "text": "I am needed?",
           "unit": "Dragoon",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/98/DragoonVoid_What07.ogg/revision/latest?cb=20211028180857"
-        },
-        {
-          "text": "What is your will?",
-          "unit": "Karass",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/0/01/Karass_What00.ogg/revision/latest?cb=20211128185559"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/98/DragoonVoid_What07.ogg/revision/latest?cb=20211028180857",
+          "game": "sc2"
         },
         {
           "text": "Too long have I rested.",
           "unit": "Mirage",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/5/55/Mirage_What04.ogg/revision/latest?cb=20211028194851"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/5/55/Mirage_What04.ogg/revision/latest?cb=20211028194851",
+          "game": "sc2"
+        },
+        {
+          "text": "Consciousness awakened.",
+          "unit": "Disruptor",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/f/fb/RobotPusher_Pusher_040.ogg/revision/latest?cb=20211013163120",
+          "game": "sc2"
         },
         {
           "text": "I am unleashed.",
           "unit": "Vanguard",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/d/d3/Vanguard_Attack05.ogg/revision/latest?cb=20211128152032"
-        },
-        {
-          "text": "Prismatic core online.",
-          "unit": "Void Ray",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/b/bf/VoidRay_Ready00.ogg/revision/latest?cb=20211022182637"
-        },
-        {
-          "text": "You seek guidance?",
-          "unit": "Oracle",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/7e/ZVO_ProtossOracle_ProtossFlyingCaster_007.ogg/revision/latest?cb=20211021144722"
-        },
-        {
-          "text": "How can I aid you?",
-          "unit": "Oracle",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/a/ab/ZVO_ProtossOracle_ProtossFlyingCaster_008.ogg/revision/latest?cb=20211021144724"
-        },
-        {
-          "text": "I return to serve.",
-          "unit": "Immortal",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/84/Immortal_Ready00.ogg/revision/latest?cb=20211021130855"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/d/d3/Vanguard_Attack05.ogg/revision/latest?cb=20211128152032",
+          "game": "sc2"
         }
       ]
     },
@@ -131,238 +53,60 @@
       "description": "When user submits a prompt",
       "recommendations": [
         {
-          "text": "It shall be done.",
-          "unit": "Adept",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/5/58/Adept_Yes01.ogg/revision/latest?cb=20211012014820"
-        },
-        {
-          "text": "Forward.",
-          "unit": "Adept",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/a/a1/Adept_Yes07.ogg/revision/latest?cb=20211012014829"
-        },
-        {
-          "text": "So be it.",
-          "unit": "Annihilator",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/6/6e/Annihilator_Yes02.ogg/revision/latest?cb=20211026185806"
-        },
-        {
-          "text": "Very well.",
-          "unit": "Annihilator",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/6/68/Annihilator_Yes03.ogg/revision/latest?cb=20211026185808"
-        },
-        {
-          "text": "We proceed.",
-          "unit": "Arbiter",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/d/df/Arbiter_Attack03.ogg/revision/latest?cb=20211026214509"
-        },
-        {
-          "text": "Let it be so.",
-          "unit": "Arbiter",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/3/3b/Arbiter_Yes06.ogg/revision/latest?cb=20211026214532"
-        },
-        {
-          "text": "It will be.",
-          "unit": "Archon",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/2/22/Archon_Yes04.ogg/revision/latest?cb=20211012191159"
-        },
-        {
-          "text": "As the chain commands.",
-          "unit": "Ascendant",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/e/e6/Ascendant_Yes01.ogg/revision/latest?cb=20211026233237"
-        },
-        {
-          "text": "So shall it be.",
-          "unit": "Avenger",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/2/2a/Avenger_Yes02.ogg/revision/latest?cb=20211027001200"
-        },
-        {
-          "text": "We obey.",
-          "unit": "Avenger",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/e/e7/Avenger_Yes03.ogg/revision/latest?cb=20211027001201"
-        },
-        {
-          "text": "Let us proceed.",
-          "unit": "Carrier",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/1/1a/Carrier_What01.ogg/revision/latest?cb=20211013142127"
-        },
-        {
-          "text": "I shall be swift.",
-          "unit": "Corsair (Legacy of the Void)",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/e/e9/Corsair_Yes06.ogg/revision/latest?cb=20211028155657"
-        },
-        {
-          "text": "Unending torment.",
+          "text": "Your will... is ours...",
           "unit": "Dark archon",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/99/DarkArchon_Attack05.ogg/revision/latest?cb=20211028163335"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/b/b8/DarkArchon_What05.ogg/revision/latest?cb=20211028163353",
+          "game": "sc2"
         },
         {
           "text": "I will comply.",
           "unit": "Dark Templar",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/a/a4/DarkTemplar_Yes00.ogg/revision/latest?cb=20211013145634"
-        },
-        {
-          "text": "Understood.",
-          "unit": "Destroyer",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/b/b9/Destroyer_Yes02.ogg/revision/latest?cb=20211028173950"
-        },
-        {
-          "text": "As ordered.",
-          "unit": "Dragoon",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/b/b5/DragoonVoid_Attack04.ogg/revision/latest?cb=20211028180839"
-        },
-        {
-          "text": "Confirmed.",
-          "unit": "Dragoon",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/5/56/DragoonVoid_Yes00.ogg/revision/latest?cb=20211028180857"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/a/a4/DarkTemplar_Yes00.ogg/revision/latest?cb=20211013145634",
+          "game": "sc2"
         },
         {
           "text": "Initiating.",
           "unit": "Dragoon",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/1/1f/DragoonVoid_Yes01.ogg/revision/latest?cb=20211028180858"
-        },
-        {
-          "text": "Commencing.",
-          "unit": "Dragoon",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/a/a6/DragoonVoid_Yes04.ogg/revision/latest?cb=20211028180901"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/1/1f/DragoonVoid_Yes01.ogg/revision/latest?cb=20211028180858",
+          "game": "sc2"
         },
         {
           "text": "I will comply.",
           "unit": "High Templar (Wings of Liberty and Versus)",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/5/5b/HighTemplar_Yes03.ogg/revision/latest?cb=20211014010400"
-        },
-        {
-          "text": "I will oblige.",
-          "unit": "Karass",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/2/20/Karass_Yes02.ogg/revision/latest?cb=20211128185604"
-        },
-        {
-          "text": "As you intend.",
-          "unit": "Karass",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/76/Karass_Yes03.ogg/revision/latest?cb=20211128185605"
-        },
-        {
-          "text": "I will find the solution.",
-          "unit": "Karax",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/d/d7/Karax_What03.ogg/revision/latest?cb=20211128184155"
-        },
-        {
-          "text": "I answer the call.",
-          "unit": "Mirage",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/77/Mirage_What01.ogg/revision/latest?cb=20211028194848"
-        },
-        {
-          "text": "Order received.",
-          "unit": "Mirage",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/2/22/Mirage_Yes03.ogg/revision/latest?cb=20211028194856"
-        },
-        {
-          "text": "I shall indulge.",
-          "unit": "Tal'darim Mothership",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/d/db/MothershipVoid_Yes04.ogg/revision/latest?cb=20211119155521"
-        },
-        {
-          "text": "A worthy order.",
-          "unit": "Tal'darim Mothership",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/b/b3/MothershipVoid_Yes05.ogg/revision/latest?cb=20211119155522"
-        },
-        {
-          "text": "We proceed.",
-          "unit": "Mothership/Mothership Core",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/82/Mothership_Yes03.ogg/revision/latest?cb=20211021133112"
-        },
-        {
-          "text": "Downloading orders.",
-          "unit": "Mothership/Mothership Core",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/82/Mothership_Yes04.ogg/revision/latest?cb=20211021133113"
-        },
-        {
-          "text": "I will comply.",
-          "unit": "Phoenix",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/0/0f/Phoenix_Yes05.ogg/revision/latest?cb=20211021135502"
-        },
-        {
-          "text": "Executing.",
-          "unit": "Blood hunter",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/2/23/ShadowHunter_Attack04.ogg/revision/latest?cb=20211027005921"
-        },
-        {
-          "text": "It shall be so.",
-          "unit": "Blood hunter",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/6/62/ShadowHunter_Yes07.ogg/revision/latest?cb=20211027005952"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/5/5b/HighTemplar_Yes03.ogg/revision/latest?cb=20211014010400",
+          "game": "sc2"
         },
         {
           "text": "It shall be as you say.",
           "unit": "Stalker",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/b/b9/Stalker_Yes01.ogg/revision/latest?cb=20211021141920"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/b/b9/Stalker_Yes01.ogg/revision/latest?cb=20211021141920",
+          "game": "sc2"
         },
         {
           "text": "It shall be done.",
           "unit": "Void Ray",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/d/d9/VoidRay_Yes01.ogg/revision/latest?cb=20211022182645"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/d/d9/VoidRay_Yes01.ogg/revision/latest?cb=20211022182645",
+          "game": "sc2"
         },
         {
           "text": "Let us begin.",
           "unit": "Oracle",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/81/ZVO_ProtossOracle_ProtossFlyingCaster_010.ogg/revision/latest?cb=20211021144727"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/81/ZVO_ProtossOracle_ProtossFlyingCaster_010.ogg/revision/latest?cb=20211021144727",
+          "game": "sc2"
         },
         {
           "text": "Extrapolating strings.",
           "unit": "Oracle",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/f/f0/ZVO_ProtossOracle_ProtossFlyingCaster_021.ogg/revision/latest?cb=20211021144742"
-        },
-        {
-          "text": "Confirmed.",
-          "unit": "Tempest",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/2/25/ZVO_ProtossTempest_CarrierShip_014.ogg/revision/latest?cb=20211021190240"
-        },
-        {
-          "text": "Your command is law.",
-          "unit": "Centurion",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/47/ZealotNerazim_Yes01.ogg/revision/latest?cb=20211028135856"
-        },
-        {
-          "text": "Your will... is ours...",
-          "unit": "Dark archon",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/b/b8/DarkArchon_What05.ogg/revision/latest?cb=20211028163353"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/f/f0/ZVO_ProtossOracle_ProtossFlyingCaster_021.ogg/revision/latest?cb=20211021144742",
+          "game": "sc2"
         }
       ]
     },
@@ -371,130 +115,53 @@
       "description": "When Claude finishes responding",
       "recommendations": [
         {
-          "text": "I'm waiting...",
-          "unit": "Annihilator",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/1/1e/Annihilator_What02.ogg/revision/latest?cb=20211026185801"
-        },
-        {
-          "text": "Our triumph is at hand.",
-          "unit": "Annihilator",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/9c/Annihilator_Yes06.ogg/revision/latest?cb=20211026185811"
-        },
-        {
           "text": "The merging is complete.",
           "unit": "Archon",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/43/Archon_Ready00.ogg/revision/latest?cb=20211012191147"
-        },
-        {
-          "text": "We need focus!",
-          "unit": "Archon",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/6/62/Archon_What01.ogg/revision/latest?cb=20211012191150"
-        },
-        {
-          "text": "Awaiting the call.",
-          "unit": "Carrier",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/5/5a/Carrier_What03.ogg/revision/latest?cb=20211013142130"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/43/Archon_Ready00.ogg/revision/latest?cb=20211012191147",
+          "game": "sc2"
         },
         {
           "text": "We are ready.",
           "unit": "Carrier",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/46/Carrier_What05.ogg/revision/latest?cb=20211013142132"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/46/Carrier_What05.ogg/revision/latest?cb=20211013142132",
+          "game": "sc2"
         },
         {
           "text": "Awaiting instructions.",
           "unit": "Dragoon",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/0/00/DragoonVoid_What01.ogg/revision/latest?cb=20211028180851"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/0/00/DragoonVoid_What01.ogg/revision/latest?cb=20211028180851",
+          "game": "sc2"
         },
         {
-          "text": "Input command.",
-          "unit": "Dragoon",
+          "text": "I return to serve.",
+          "unit": "Immortal",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/43/DragoonVoid_What03.ogg/revision/latest?cb=20211028180853"
-        },
-        {
-          "text": "We seek enlightenment.",
-          "unit": "High Templar (Wings of Liberty and Versus)",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/43/HighTemplar_What05.ogg/revision/latest?cb=20211014010349"
-        },
-        {
-          "text": "Awaiting your command.",
-          "unit": "Karass",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/9b/Karass_What01.ogg/revision/latest?cb=20211128185559"
-        },
-        {
-          "text": "Direct my efforts.",
-          "unit": "Karass",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/c/cd/Karass_What02.ogg/revision/latest?cb=20211128185600"
-        },
-        {
-          "text": "We await.",
-          "unit": "Mothership/Mothership Core",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/a/af/Mothership_What01.ogg/revision/latest?cb=20211021133055"
-        },
-        {
-          "text": "Direct us.",
-          "unit": "Mothership/Mothership Core",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/7e/Mothership_What04.ogg/revision/latest?cb=20211021133100"
-        },
-        {
-          "text": "Guide us.",
-          "unit": "Mothership/Mothership Core",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/3/37/Mothership_What05.ogg/revision/latest?cb=20211021133101"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/84/Immortal_Ready00.ogg/revision/latest?cb=20211021130855",
+          "game": "sc2"
         },
         {
           "text": "Job's finished. (construction complete)",
           "unit": "SCV",
           "race": "terran",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/80/SCV_JobsFinished00.ogg/revision/latest?cb=20211007203851"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/80/SCV_JobsFinished00.ogg/revision/latest?cb=20211007203851",
+          "game": "sc2"
         },
         {
           "text": "Processed.",
           "unit": "Void Ray",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/6/6d/VoidRay_Yes07.ogg/revision/latest?cb=20211022182652"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/6/6d/VoidRay_Yes07.ogg/revision/latest?cb=20211022182652",
+          "game": "sc2"
         },
         {
           "text": "My meditation is over.",
           "unit": "Zealot",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/b/b4/Zealot_What00.ogg/revision/latest?cb=20211026183405"
-        },
-        {
-          "text": "Command me.",
-          "unit": "Zealot",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/73/Zealot_What02.ogg/revision/latest?cb=20211026183407"
-        },
-        {
-          "text": "We are unanimous.",
-          "unit": "High Templar (Wings of Liberty and Versus)",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/8c/HighTemplar_Yes05.ogg/revision/latest?cb=20211014010403"
-        },
-        {
-          "text": "Your will, imposed.",
-          "unit": "Destroyer",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/74/Destroyer_Yes00.ogg/revision/latest?cb=20211028173948"
-        },
-        {
-          "text": "Dimensional strings attuned.",
-          "unit": "Oracle",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/c/c3/ZVO_ProtossOracle_ProtossFlyingCaster_005.ogg/revision/latest?cb=20211021144717"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/b/b4/Zealot_What00.ogg/revision/latest?cb=20211026183405",
+          "game": "sc2"
         }
       ]
     },
@@ -503,58 +170,53 @@
       "description": "Before conversation context is compacted",
       "recommendations": [
         {
+          "text": "Our light lives on.",
+          "unit": "Avenger",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/d/d8/Avenger_Yes05.ogg/revision/latest?cb=20211027001203",
+          "game": "sc2"
+        },
+        {
           "text": "Thoughts in chaos... (mind controlled unit selected)",
           "unit": "Dark archon",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/7c/DarkArchon_What_MC02.ogg/revision/latest?cb=20211028163346"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/7c/DarkArchon_What_MC02.ogg/revision/latest?cb=20211028163346",
+          "game": "sc2"
         },
         {
           "text": "My memory is not what it was...",
           "unit": "Immortal",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/74/Immortal_Pissed00.ogg/revision/latest?cb=20211021130841"
-        },
-        {
-          "text": "Calibrating.",
-          "unit": "Mirage",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/1/1c/Mirage_Yes02.ogg/revision/latest?cb=20211028194855"
-        },
-        {
-          "text": "I am but memory. (when killed)",
-          "unit": "Vanguard",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/a/a1/Vanguard_Death01.ogg/revision/latest?cb=20211128152035"
-        },
-        {
-          "text": "Systems at full.",
-          "unit": "Void Ray",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/f/f9/VoidRay_Yes06.ogg/revision/latest?cb=20211022182651"
-        },
-        {
-          "text": "Synchronizing.",
-          "unit": "Void Ray",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/e/e6/VoidRay_Attack06.ogg/revision/latest?cb=20211022182628"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/74/Immortal_Pissed00.ogg/revision/latest?cb=20211021130841",
+          "game": "sc2"
         },
         {
           "text": "We begin anew.",
           "unit": "Disruptor",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/2/2e/RobotPusher_Pusher_010.ogg/revision/latest?cb=20211013164115"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/2/2e/RobotPusher_Pusher_010.ogg/revision/latest?cb=20211013164115",
+          "game": "sc2"
+        },
+        {
+          "text": "I am but memory. (when killed)",
+          "unit": "Vanguard",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/a/a1/Vanguard_Death01.ogg/revision/latest?cb=20211128152035",
+          "game": "sc2"
         },
         {
           "text": "We are reforged.",
           "unit": "Vanguard",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/3/3f/Vanguard_What00.ogg/revision/latest?cb=20211128152042"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/3/3f/Vanguard_What00.ogg/revision/latest?cb=20211128152042",
+          "game": "sc2"
         },
         {
-          "text": "Our light lives on.",
-          "unit": "Avenger",
+          "text": "Systems at full.",
+          "unit": "Void Ray",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/d/d8/Avenger_Yes05.ogg/revision/latest?cb=20211027001203"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/f/f9/VoidRay_Yes06.ogg/revision/latest?cb=20211022182651",
+          "game": "sc2"
         }
       ]
     },
@@ -566,37 +228,36 @@
           "text": "Give us your command.",
           "unit": "Adept",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/e/e5/Adept_What00.ogg/revision/latest?cb=20211012014809"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/e/e5/Adept_What00.ogg/revision/latest?cb=20211012014809",
+          "game": "sc2"
         },
         {
-          "text": "Awaiting the call.",
-          "unit": "Carrier",
+          "text": "Input command.",
+          "unit": "Dragoon",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/5/5a/Carrier_What03.ogg/revision/latest?cb=20211013142130"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/43/DragoonVoid_What03.ogg/revision/latest?cb=20211028180853",
+          "game": "sc2"
         },
         {
           "text": "Downloading orders.",
-          "unit": "Mothership",
+          "unit": "Mothership/Mothership Core",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/82/Mothership_Yes04.ogg/revision/latest?cb=20211021133113"
-        },
-        {
-          "text": "Command me.",
-          "unit": "Zealot",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/73/Zealot_What02.ogg/revision/latest?cb=20211026183407"
-        },
-        {
-          "text": "As the chain commands.",
-          "unit": "Ascendant",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/e/e6/Ascendant_Yes01.ogg/revision/latest?cb=20211026233237"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/82/Mothership_Yes04.ogg/revision/latest?cb=20211021133113",
+          "game": "sc2"
         },
         {
           "text": "Your command is law.",
           "unit": "Centurion",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/47/ZealotNerazim_Yes01.ogg/revision/latest?cb=20211028135856"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/47/ZealotNerazim_Yes01.ogg/revision/latest?cb=20211028135856",
+          "game": "sc2"
+        },
+        {
+          "text": "Command me.",
+          "unit": "Zealot",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/73/Zealot_What02.ogg/revision/latest?cb=20211026183407",
+          "game": "sc2"
         }
       ]
     },
@@ -608,37 +269,36 @@
           "text": "What guidance?",
           "unit": "Archon",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/95/Archon_What03.ogg/revision/latest?cb=20211012191153"
-        },
-        {
-          "text": "You seek our service?",
-          "unit": "Dark Templar",
-          "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/7c/DarkTemplar_What04.ogg/revision/latest?cb=20211013145629"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/95/Archon_What03.ogg/revision/latest?cb=20211012191153",
+          "game": "sc2"
         },
         {
           "text": "What would you ask of us?",
           "unit": "Dark Templar",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/93/DarkTemplar_What06.ogg/revision/latest?cb=20211013145632"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/93/DarkTemplar_What06.ogg/revision/latest?cb=20211013145632",
+          "game": "sc2"
         },
         {
-          "text": "You seek guidance?",
-          "unit": "Oracle",
+          "text": "We seek enlightenment.",
+          "unit": "High Templar (Wings of Liberty and Versus)",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/7e/ZVO_ProtossOracle_ProtossFlyingCaster_007.ogg/revision/latest?cb=20211021144722"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/43/HighTemplar_What05.ogg/revision/latest?cb=20211014010349",
+          "game": "sc2"
         },
         {
-          "text": "How can I aid you?",
-          "unit": "Oracle",
+          "text": "Direct us.",
+          "unit": "Mothership/Mothership Core",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/a/ab/ZVO_ProtossOracle_ProtossFlyingCaster_008.ogg/revision/latest?cb=20211021144724"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/7e/Mothership_What04.ogg/revision/latest?cb=20211021133100",
+          "game": "sc2"
         },
         {
-          "text": "Ask, I may listen.",
-          "unit": "Ascendant",
+          "text": "Guide us.",
+          "unit": "Mothership/Mothership Core",
           "race": "protoss",
-          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/f/f4/Ascendant_What00.ogg/revision/latest?cb=20211026233230"
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/3/37/Mothership_What05.ogg/revision/latest?cb=20211021133101",
+          "game": "sc2"
         }
       ]
     }

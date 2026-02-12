@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "type": "commonjs",
   "scripts": {
-    "scrape": "node scrape-wiki.js"
+    "scrape": "node scrape.js",
+    "scrape:sc2": "node scrape.js sc2",
+    "scrape:legacy": "node scrape-wiki.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0"

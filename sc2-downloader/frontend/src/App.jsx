@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import UnitPanel from './components/UnitPanel';
-import quotations from './data/quotations.json';
+import gamesRegistry from './data/games.json';
 import initialRecommendedSetup from './data/recommendedSetup.json';
-
-const RACES = ['all', 'protoss', 'terran', 'zerg'];
-const VIEWS = ['home', ...RACES, 'recommended'];
+import { getFactionStyles } from './utils/factionStyles';
 
 const STORAGE_KEY = 'sc2-quotes-recommended-setup';
 
@@ -21,11 +19,39 @@ function getInitialRecommendedSetup() {
   return initialRecommendedSetup;
 }
 
+// Map of lazy-loading functions for each game's data file
+const gameDataLoaders = {
+  sc2: () => import('./data/games/sc2.json'),
+};
+
 function App() {
+  const [selectedGame, setSelectedGame] = useState(gamesRegistry.games[0]);
+  const [gameData, setGameData] = useState(null);
   const [selectedView, setSelectedView] = useState('home');
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [quoteSearchQuery, setQuoteSearchQuery] = useState('');
   const [recommendedSetup, setRecommendedSetup] = useState(getInitialRecommendedSetup);
+
+  // Build faction list from selected game
+  const factions = selectedGame.factions.map(f => f.id);
+  const VIEWS = ['home', 'all', ...factions, 'recommended'];
+
+  // Lazy-load game data when selected game changes
+  useEffect(() => {
+    let cancelled = false;
+    setGameData(null);
+
+    const loader = gameDataLoaders[selectedGame.id];
+    if (loader) {
+      loader().then(mod => {
+        if (!cancelled) {
+          setGameData(mod.default || mod);
+        }
+      });
+    }
+
+    return () => { cancelled = true; };
+  }, [selectedGame.id]);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(recommendedSetup));
@@ -91,24 +117,34 @@ function App() {
     setRecommendedSetup(newSetup);
   };
 
+  const handleGameChange = (gameId) => {
+    const game = gamesRegistry.games.find(g => g.id === gameId);
+    if (game) {
+      setSelectedGame(game);
+      setSelectedView('home');
+      setSelectedUnit(null);
+      setQuoteSearchQuery('');
+    }
+  };
+
   const isHomeView = selectedView === 'home';
   const isRecommendedView = selectedView === 'recommended';
-  const selectedRace = (isRecommendedView || isHomeView) ? 'all' : selectedView;
+  const selectedFaction = (isRecommendedView || isHomeView) ? 'all' : selectedView;
 
-  const currentSections = (isRecommendedView || isHomeView)
+  const currentSections = (isRecommendedView || isHomeView || !gameData)
     ? []
-    : selectedRace === 'all'
-      ? Object.entries(quotations.races).flatMap(([race, data]) =>
+    : selectedFaction === 'all'
+      ? Object.entries(gameData.factions).flatMap(([factionId, data]) =>
           data.sections.map(section => ({
             ...section,
-            name: `${race.charAt(0).toUpperCase() + race.slice(1)} - ${section.name}`,
-            race,
-            units: section.units.map(unit => ({ ...unit, race }))
+            name: `${factionId.charAt(0).toUpperCase() + factionId.slice(1)} - ${section.name}`,
+            race: factionId,
+            units: section.units.map(unit => ({ ...unit, race: factionId }))
           }))
         )
-      : (quotations.races[selectedRace]?.sections || []).map(section => ({
+      : (gameData.factions[selectedFaction]?.sections || []).map(section => ({
           ...section,
-          units: section.units.map(unit => ({ ...unit, race: selectedRace }))
+          units: section.units.map(unit => ({ ...unit, race: selectedFaction }))
         }));
 
   const handleViewChange = (view) => {
@@ -117,18 +153,13 @@ function App() {
     setQuoteSearchQuery('');
   };
 
-  const bgClass = (isRecommendedView || isHomeView)
-    ? 'bg-gray-950'
-    : selectedRace === 'all'
-      ? 'bg-gray-950'
-      : selectedRace === 'terran'
-        ? 'bg-terran-darker'
-        : selectedRace === 'zerg'
-          ? 'bg-zerg-darker'
-          : 'bg-protoss-darker';
+  const getBgClass = () => {
+    if (isRecommendedView || isHomeView || selectedFaction === 'all') return 'bg-gray-950';
+    return getFactionStyles(selectedFaction).darkerBgClass;
+  };
 
   return (
-    <div className={`flex h-screen ${bgClass}`}>
+    <div className={`flex h-screen ${getBgClass()}`}>
       <Sidebar
         sections={currentSections}
         selectedUnit={selectedUnit}
@@ -139,10 +170,13 @@ function App() {
         quoteSearchQuery={quoteSearchQuery}
         onQuoteSearchChange={setQuoteSearchQuery}
         recommendedSetup={recommendedSetup}
+        selectedGame={selectedGame}
+        games={gamesRegistry.games}
+        onGameChange={handleGameChange}
       />
       <UnitPanel
         unit={selectedUnit}
-        race={selectedRace}
+        race={selectedFaction}
         sections={currentSections}
         quoteSearchQuery={quoteSearchQuery}
         isHomeView={isHomeView}
@@ -154,6 +188,7 @@ function App() {
         onAddRecommendation={handleAddRecommendation}
         onImportSetup={handleImportSetup}
         onNavigate={handleViewChange}
+        selectedGame={selectedGame}
       />
     </div>
   );

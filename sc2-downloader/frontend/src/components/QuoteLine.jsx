@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useSelection } from '../contexts/SelectionContext';
+import { getFactionStyles } from '../utils/factionStyles';
 
 // Create a filename-safe suffix from quote text (max ~50 chars)
 function createQuoteSuffix(text, maxLength = 50) {
@@ -17,25 +18,20 @@ function createQuoteSuffix(text, maxLength = 50) {
   return lastSpace > maxLength * 0.6 ? truncated.slice(0, lastSpace) : truncated;
 }
 
-export default function QuoteLine({ quote, race = 'protoss', unitName = '', categoryName = '', recommendedSetup = null, onAddRecommendation = null }) {
+export default function QuoteLine({ quote, race = 'protoss', unitName = '', categoryName = '', recommendedSetup = null, onAddRecommendation = null, game = 'sc2' }) {
   const { isSelected, toggleSelection, selectedCount } = useSelection();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const audioRef = useRef(null);
 
-  const raceColors = {
-    protoss: { primary: 'text-protoss-primary', primaryBg: 'bg-protoss-primary/20', primaryHover: 'hover:bg-protoss-primary/40', secondary: 'text-protoss-secondary', secondaryBg: 'bg-protoss-secondary/20', secondaryHover: 'hover:bg-protoss-secondary/40' },
-    terran: { primary: 'text-terran-primary', primaryBg: 'bg-terran-primary/20', primaryHover: 'hover:bg-terran-primary/40', secondary: 'text-terran-secondary', secondaryBg: 'bg-terran-secondary/20', secondaryHover: 'hover:bg-terran-secondary/40' },
-    zerg: { primary: 'text-zerg-primary', primaryBg: 'bg-zerg-primary/20', primaryHover: 'hover:bg-zerg-primary/40', secondary: 'text-zerg-secondary', secondaryBg: 'bg-zerg-secondary/20', secondaryHover: 'hover:bg-zerg-secondary/40' },
-  };
-  const colors = raceColors[race] || raceColors.protoss;
-  const primaryClass = colors.primary;
-  const primaryBg = colors.primaryBg;
-  const primaryHoverBg = colors.primaryHover;
-  const secondaryClass = colors.secondary;
-  const secondaryBg = colors.secondaryBg;
-  const secondaryHoverBg = colors.secondaryHover;
+  const styles = getFactionStyles(race);
+  const primaryClass = styles.primaryClass;
+  const primaryBg = styles.primaryBg;
+  const primaryHoverBg = styles.primaryHover;
+  const secondaryClass = styles.secondaryClass;
+  const secondaryBg = styles.secondaryBg;
+  const secondaryHoverBg = styles.secondaryHover;
 
   // Proxy audio through backend to handle CORS and missing files
   const proxyUrl = `http://localhost:3001/api/audio?url=${encodeURIComponent(quote.audioUrl)}`;
@@ -113,6 +109,7 @@ export default function QuoteLine({ quote, race = 'protoss', unitName = '', cate
       text: quote.text,
       unit: unitName,
       race,
+      game,
       audioUrl: quote.audioUrl
     });
   };

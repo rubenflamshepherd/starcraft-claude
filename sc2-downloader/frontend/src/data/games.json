@@ -1,0 +1,42 @@
+{
+  "games": [
+    {
+      "id": "sc2",
+      "name": "StarCraft II",
+      "dataFile": "sc2.json",
+      "factions": [
+        {
+          "id": "protoss",
+          "name": "Protoss",
+          "colors": {
+            "primary": "#4a90d9",
+            "secondary": "#7c3aed",
+            "dark": "#1a1a2e",
+            "darker": "#0f0f1a"
+          }
+        },
+        {
+          "id": "terran",
+          "name": "Terran",
+          "colors": {
+            "primary": "#f59e0b",
+            "secondary": "#ef4444",
+            "dark": "#1a1a1a",
+            "darker": "#0f0f0f"
+          }
+        },
+        {
+          "id": "zerg",
+          "name": "Zerg",
+          "colors": {
+            "primary": "#a855f7",
+            "secondary": "#22c55e",
+            "dark": "#1a1a1e",
+            "darker": "#0f0f12"
+          }
+        }
+      ],
+      "attribution": "Audio from StarCraft Wiki"
+    }
+  ]
+}

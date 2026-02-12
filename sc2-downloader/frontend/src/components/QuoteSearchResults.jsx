@@ -1,13 +1,9 @@
 import { useMemo } from 'react';
 import QuoteLine from './QuoteLine';
-
-const getRaceStyles = (race) => ({
-  primaryClass: race === 'terran' ? 'text-terran-primary' : race === 'zerg' ? 'text-zerg-primary' : 'text-protoss-primary',
-  badgeBg: race === 'terran' ? 'bg-terran-primary/20' : race === 'zerg' ? 'bg-zerg-primary/20' : 'bg-protoss-primary/20',
-});
+import { getFactionStyles } from '../utils/factionStyles';
 
 export default function QuoteSearchResults({ sections, searchQuery, race = 'protoss' }) {
-  const defaultStyles = getRaceStyles(race);
+  const defaultStyles = getFactionStyles(race);
 
   const results = useMemo(() => {
     if (!searchQuery.trim()) return [];
@@ -70,7 +66,7 @@ export default function QuoteSearchResults({ sections, searchQuery, race = 'prot
 
       <div className="space-y-1">
         {results.map((result, index) => {
-          const styles = getRaceStyles(result.race);
+          const styles = getFactionStyles(result.race);
           return (
             <div key={index} className="rounded hover:bg-white/5">
               <div className="flex items-center gap-2 px-3 pt-2">

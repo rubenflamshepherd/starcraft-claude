@@ -106,8 +106,8 @@ export default function LandingPage({ onNavigate }) {
 
   const features = [
     {
-      title: 'Browse by Race',
-      description: 'Explore hundreds of iconic voice lines from Protoss, Terran, and Zerg units. Search by unit name or quote text.',
+      title: 'Browse by Faction',
+      description: 'Explore hundreds of iconic voice lines organized by faction. Search by unit name or quote text.',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -173,10 +173,10 @@ export default function LandingPage({ onNavigate }) {
       {/* Hero Section */}
       <div className="max-w-4xl mx-auto mb-12 text-center">
         <h1 className="text-4xl font-bold text-white mb-4">
-          SC2 Sounds for Claude Code
+          Game Sounds for Claude Code
         </h1>
         <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
-          Add StarCraft II unit quotes to your Claude Code sessions. Browse hundreds of iconic voice lines, preview them, and save directly to your <code className="text-amber-400 bg-gray-800 px-1.5 py-0.5 rounded">.claude/sounds</code> folder.
+          Add iconic game quotes to your Claude Code sessions. Browse hundreds of voice lines, preview them, and save directly to your <code className="text-amber-400 bg-gray-800 px-1.5 py-0.5 rounded">.claude/sounds</code> folder.
         </p>
         <div className="flex items-center justify-center gap-4 flex-wrap">
           <button
