@@ -7,6 +7,8 @@ const HOOK_TO_FOLDER = {
   UserPromptSubmit: 'userpromptsubmit',
   Stop: 'done',
   PreCompact: 'precompact',
+  PermissionPrompt: 'permission',
+  Question: 'question',
 };
 
 export default function LandingPage({ onNavigate }) {

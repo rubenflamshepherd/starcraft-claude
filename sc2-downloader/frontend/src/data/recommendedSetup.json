@@ -557,6 +557,90 @@
           "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/d/d8/Avenger_Yes05.ogg/revision/latest?cb=20211027001203"
         }
       ]
+    },
+    {
+      "name": "PermissionPrompt",
+      "description": "When Claude needs permission to use a tool",
+      "recommendations": [
+        {
+          "text": "Give us your command.",
+          "unit": "Adept",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/e/e5/Adept_What00.ogg/revision/latest?cb=20211012014809"
+        },
+        {
+          "text": "Awaiting the call.",
+          "unit": "Carrier",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/5/5a/Carrier_What03.ogg/revision/latest?cb=20211013142130"
+        },
+        {
+          "text": "Downloading orders.",
+          "unit": "Mothership",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/8/82/Mothership_Yes04.ogg/revision/latest?cb=20211021133113"
+        },
+        {
+          "text": "Command me.",
+          "unit": "Zealot",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/73/Zealot_What02.ogg/revision/latest?cb=20211026183407"
+        },
+        {
+          "text": "As the chain commands.",
+          "unit": "Ascendant",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/e/e6/Ascendant_Yes01.ogg/revision/latest?cb=20211026233237"
+        },
+        {
+          "text": "Your command is law.",
+          "unit": "Centurion",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/4/47/ZealotNerazim_Yes01.ogg/revision/latest?cb=20211028135856"
+        }
+      ]
+    },
+    {
+      "name": "Question",
+      "description": "When Claude asks the user a question",
+      "recommendations": [
+        {
+          "text": "What guidance?",
+          "unit": "Archon",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/95/Archon_What03.ogg/revision/latest?cb=20211012191153"
+        },
+        {
+          "text": "You seek our service?",
+          "unit": "Dark Templar",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/7c/DarkTemplar_What04.ogg/revision/latest?cb=20211013145629"
+        },
+        {
+          "text": "What would you ask of us?",
+          "unit": "Dark Templar",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/9/93/DarkTemplar_What06.ogg/revision/latest?cb=20211013145632"
+        },
+        {
+          "text": "You seek guidance?",
+          "unit": "Oracle",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/7/7e/ZVO_ProtossOracle_ProtossFlyingCaster_007.ogg/revision/latest?cb=20211021144722"
+        },
+        {
+          "text": "How can I aid you?",
+          "unit": "Oracle",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/a/ab/ZVO_ProtossOracle_ProtossFlyingCaster_008.ogg/revision/latest?cb=20211021144724"
+        },
+        {
+          "text": "Ask, I may listen.",
+          "unit": "Ascendant",
+          "race": "protoss",
+          "audioUrl": "https://static.wikia.nocookie.net/starcraft/images/f/f4/Ascendant_What00.ogg/revision/latest?cb=20211026233230"
+        }
+      ]
     }
   ]
 }

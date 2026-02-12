@@ -15,6 +15,8 @@ const HOOK_TO_FOLDER = {
   UserPromptSubmit: 'userpromptsubmit',
   Stop: 'done',
   PreCompact: 'precompact',
+  PermissionPrompt: 'permission',
+  Question: 'question',
 };
 
 function SortableRecommendation({ rec, idx, hook, hookNames, onMoveRecommendation, onRemoveRecommendation }) {
