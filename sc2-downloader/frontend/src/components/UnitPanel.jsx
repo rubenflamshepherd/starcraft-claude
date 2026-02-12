@@ -20,7 +20,7 @@ const HOOK_TO_FOLDER = {
   Question: 'question',
 };
 
-function SortableRecommendation({ rec, idx, hook, hookNames, onMoveRecommendation, onRemoveRecommendation }) {
+function SortableRecommendation({ rec, hook, hookNames, onMoveRecommendation, onRemoveRecommendation }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: rec.audioUrl });
 
   const style = {
@@ -116,9 +116,9 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
       for (const rec of hook.recommendations) {
         try {
           // Extract filename from URL
-          const urlMatch = rec.audioUrl.match(/\/([^\/]+)\.ogg\//);
+          const urlMatch = rec.audioUrl.match(/\/([^/]+)\.ogg\//);
           const baseFilename = urlMatch ? urlMatch[1] : `audio_${currentFile}`;
-          const filename = `${baseFilename} - ${rec.text.replace(/[\/\\:*?"<>|]/g, '')}.mp3`;
+          const filename = `${baseFilename} - ${rec.text.replace(/[/\\:*?"<>|]/g, '')}.mp3`;
 
           // Fetch via download API
           const downloadUrl = `http://localhost:3001/api/download?url=${encodeURIComponent(rec.audioUrl)}&filename=${encodeURIComponent(filename)}`;
@@ -155,9 +155,9 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
       for (const hook of recommendedSetup.hooks) {
         const folderName = HOOK_TO_FOLDER[hook.name] || hook.name.toLowerCase();
         for (const rec of hook.recommendations) {
-          const urlMatch = rec.audioUrl.match(/\/([^\/]+)\.ogg\//);
+          const urlMatch = rec.audioUrl.match(/\/([^/]+)\.ogg\//);
           const baseFilename = urlMatch ? urlMatch[1] : `audio_${allQuotes.length}`;
-          const filename = `${baseFilename} - ${rec.text.replace(/[\/\\:*?"<>|]/g, '')}.mp3`;
+          const filename = `${baseFilename} - ${rec.text.replace(/[/\\:*?"<>|]/g, '')}.mp3`;
           allQuotes.push({
             audioUrl: rec.audioUrl,
             filename,
@@ -220,7 +220,7 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
         } else {
           alert('Invalid setup file format');
         }
-      } catch (error) {
+      } catch {
         alert('Failed to parse JSON file');
       }
     };
@@ -269,11 +269,10 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd(hook.name)}>
           <SortableContext items={hook.recommendations.map(r => r.audioUrl)} strategy={verticalListSortingStrategy}>
             <div className="bg-gray-900/50 rounded-lg border border-gray-700/30">
-              {hook.recommendations.map((rec, idx) => (
+              {hook.recommendations.map((rec) => (
                 <SortableRecommendation
                   key={rec.audioUrl}
                   rec={rec}
-                  idx={idx}
                   hook={hook}
                   hookNames={hookNames}
                   onMoveRecommendation={onMoveRecommendation}

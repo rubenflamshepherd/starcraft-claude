@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { buildViewConfig, getFactionStyles } from '../utils/factionStyles';
 
 export default function Sidebar({ sections, selectedUnit, onSelectUnit, selectedView, onViewChange, views, quoteSearchQuery, onQuoteSearchChange, recommendedSetup, selectedGame, games, onGameChange }) {
@@ -14,7 +14,14 @@ export default function Sidebar({ sections, selectedUnit, onSelectUnit, selected
   const config = viewConfig[selectedView] || viewConfig[selectedGame.factions[0]?.id] || viewConfig.home;
   const factions = views.filter(v => v !== 'recommended' && v !== 'home');
 
-  useEffect(() => {
+  // Compute a key representing the current sections/view to detect when to reset
+  const expandedKey = isRecommendedView
+    ? `rec-${recommendedSetup?.hooks?.map(h => h.name).join(',')}`
+    : sections.map(s => s.name).join(',');
+  const [prevExpandedKey, setPrevExpandedKey] = useState(expandedKey);
+
+  if (expandedKey !== prevExpandedKey) {
+    setPrevExpandedKey(expandedKey);
     if (isRecommendedView && recommendedSetup?.hooks) {
       setExpandedSections(
         recommendedSetup.hooks.reduce((acc, hook) => ({ ...acc, [hook.name]: true }), {})
@@ -24,7 +31,7 @@ export default function Sidebar({ sections, selectedUnit, onSelectUnit, selected
         sections.reduce((acc, section) => ({ ...acc, [section.name]: true }), {})
       );
     }
-  }, [sections, isRecommendedView, recommendedSetup]);
+  }
 
   const toggleSection = (sectionName) => {
     setExpandedSections(prev => ({

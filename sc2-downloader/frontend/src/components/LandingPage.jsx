@@ -69,9 +69,9 @@ export default function LandingPage({ onNavigate }) {
       for (const hook of recommendedSetup.hooks) {
         const folderName = HOOK_TO_FOLDER[hook.name] || hook.name.toLowerCase();
         for (const rec of hook.recommendations) {
-          const urlMatch = rec.audioUrl.match(/\/([^\/]+)\.ogg\//);
+          const urlMatch = rec.audioUrl.match(/\/([^/]+)\.ogg\//);
           const baseFilename = urlMatch ? urlMatch[1] : `audio_${quotes.length}`;
-          const filename = `${baseFilename} - ${rec.text.replace(/[\/\\:*?"<>|]/g, '')}.mp3`;
+          const filename = `${baseFilename} - ${rec.text.replace(/[/\\:*?"<>|]/g, '')}.mp3`;
           quotes.push({
             audioUrl: rec.audioUrl,
             filename,
