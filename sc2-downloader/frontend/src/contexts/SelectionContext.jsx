@@ -68,6 +68,7 @@ export function SelectionProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useSelection() {
   const context = useContext(SelectionContext);
   if (!context) {

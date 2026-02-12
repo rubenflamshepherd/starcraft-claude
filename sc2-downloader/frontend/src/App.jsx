@@ -41,7 +41,6 @@ function App() {
   // Lazy-load game data when selected game changes
   useEffect(() => {
     let cancelled = false;
-    setGameData(null);
 
     const loader = gameDataLoaders[selectedGame.id];
     if (loader) {
@@ -123,6 +122,7 @@ function App() {
     const game = gamesRegistry.games.find(g => g.id === gameId);
     if (game) {
       setSelectedGame(game);
+      setGameData(null);
       setSelectedView('home');
       setSelectedUnit(null);
       setQuoteSearchQuery('');
