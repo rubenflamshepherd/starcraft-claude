@@ -4,10 +4,10 @@ Use game voice lines as Claude Code sound cues. The app lets you browse quotes f
 
 ## What This Repo Contains
 
-- `sc2-downloader/frontend`: React + Vite UI for browsing quotes and managing lists
-- `sc2-downloader/server`: Express API for audio proxying, OGG->MP3 conversion, sync, and setup
-- `sc2-downloader/claude-sounds.zsh` / `sc2-downloader/claude-sounds.bash`: shell watcher scripts
-- `sc2-downloader/scripts`: scrapers that generate `frontend/src/data/games/*.json`
+- `claude-code-notif-manager/frontend`: React + Vite UI for browsing quotes and managing lists
+- `claude-code-notif-manager/server`: Express API for audio proxying, OGG->MP3 conversion, sync, and setup
+- `claude-code-notif-manager/claude-sounds.zsh` / `claude-code-notif-manager/claude-sounds.bash`: shell watcher scripts
+- `claude-code-notif-manager/scripts`: scrapers that generate `frontend/src/data/games/*.json`
 
 ## Hook Events and Folders
 
@@ -36,7 +36,7 @@ brew install ffmpeg fswatch
 ## Quick Start
 
 ```bash
-cd sc2-downloader
+cd claude-code-notif-manager
 npm run install:all
 npm run dev
 ```
@@ -46,8 +46,8 @@ Open `http://localhost:5173`.
 Then use **One-Click Setup** on the landing page. It runs:
 
 1. `POST /api/setup-hooks` (installs Claude hook commands in `~/.claude/settings.json`)
-2. `POST /api/save-to-sounds-all` (syncs default recommended sounds to `~/.claude/sounds`)
-3. `POST /api/setup-listener` (installs `~/.claude-sounds.zsh` or `~/.claude-sounds.bash` and updates shell config)
+2. Syncs default recommended sounds to `~/.claude/sounds`
+3. Installs `~/.claude-sounds.zsh` or `~/.claude-sounds.bash` and updates shell config
 
 Restart your terminal after first setup.
 
@@ -90,7 +90,7 @@ export CLAUDE_SOUND_VOLUME=0.3
 ## Development
 
 ```bash
-cd sc2-downloader
+cd claude-code-notif-manager
 npm run dev            # frontend + server
 npm run dev:frontend   # frontend only (:5173)
 npm run dev:server     # server only (:3001)
@@ -100,13 +100,13 @@ npm run build          # frontend production build
 ## Tests
 
 ```bash
-cd sc2-downloader/frontend && npm test
-cd sc2-downloader/server && npm test
+cd claude-code-notif-manager/frontend && npm test
+cd claude-code-notif-manager/server && npm test
 ```
 
 Watch mode:
 
 ```bash
-cd sc2-downloader/frontend && npm run test:watch
-cd sc2-downloader/server && npm run test:watch
+cd claude-code-notif-manager/frontend && npm run test:watch
+cd claude-code-notif-manager/server && npm run test:watch
 ```

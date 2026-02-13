@@ -11,7 +11,7 @@ React UI for browsing game quotes and managing Claude Code sound lists.
 
 ## Run
 
-From `sc2-downloader/frontend`:
+From `claude-code-notif-manager/frontend`:
 
 ```bash
 npm install
