@@ -79,6 +79,13 @@ claude_sound_watcher_restart  # Restart the watcher
 
 The `cst` alias (claude sounds toggle) is the quickest way to turn sounds on or off. Your preference persists across terminal sessions.
 
+## Troubleshooting Notifications
+
+If Claude events are not showing macOS banners, check notification permissions in **System Settings -> Notifications**:
+
+- Enable notifications for your terminal app (`Terminal` or `iTerm`)
+- Enable notifications for `Script Editor` (notifications triggered via `osascript` may be attributed there)
+
 ## Configuration
 
 Override defaults via environment variables:

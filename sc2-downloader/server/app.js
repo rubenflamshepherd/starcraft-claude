@@ -14,12 +14,94 @@ import { execSync } from 'child_process';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const CLAUDE_DIR = join(homedir(), '.claude');
 const CLAUDE_SOUNDS_DIR = join(homedir(), '.claude', 'sounds');
+const CLAUDE_SETTINGS_PATH = join(CLAUDE_DIR, 'settings.json');
+const CLAUDE_PREV_NOTIF_CHANNEL_FILE = join(homedir(), '.claude_prev_notif_channel');
+const CLAUDE_SYSTEM_NOTIFS_INITIALIZED_FILE = join(homedir(), '.claude_system_notifs_initialized');
+const NOTIFICATIONS_DISABLED_CHANNEL = 'notifications_disabled';
+const SYSTEM_NOTIFICATION_TOGGLES = {
+  permissionPrompt: {
+    event: 'Notification',
+    matcher: 'permission_prompt',
+    command: `osascript -e 'display notification "Claude needs permission" with title "Claude Code"'`,
+  },
+  question: {
+    event: 'Notification',
+    matcher: 'elicitation_dialog',
+    command: `osascript -e 'display notification "Claude is waiting for your answer" with title "Claude Code"'`,
+  },
+  stop: {
+    event: 'Stop',
+    command: `osascript -e 'display notification "Claude finished responding" with title "Claude Code"'`,
+  },
+};
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+async function readClaudeSettings() {
+  if (!existsSync(CLAUDE_SETTINGS_PATH)) {
+    return {};
+  }
+
+  const content = await readFile(CLAUDE_SETTINGS_PATH, 'utf-8');
+  return JSON.parse(content);
+}
+
+async function writeClaudeSettings(settings) {
+  if (!existsSync(CLAUDE_DIR)) {
+    await mkdir(CLAUDE_DIR, { recursive: true });
+  }
+  await writeFile(CLAUDE_SETTINGS_PATH, JSON.stringify(settings, null, 2));
+}
+
+function hasSystemNotificationHook(entries, toggleConfig) {
+  return entries.some(entry => {
+    const matcherMatches = toggleConfig.matcher === undefined
+      ? entry.matcher === undefined
+      : entry.matcher === toggleConfig.matcher;
+    if (!matcherMatches) {
+      return false;
+    }
+    return entry.hooks?.some(hook => hook.type === 'command' && hook.command === toggleConfig.command);
+  });
+}
+
+function removeSystemNotificationHook(entries, toggleConfig) {
+  return entries
+    .map(entry => {
+      const matcherMatches = toggleConfig.matcher === undefined
+        ? entry.matcher === undefined
+        : entry.matcher === toggleConfig.matcher;
+      if (!matcherMatches || !entry.hooks) {
+        return entry;
+      }
+
+      const hooks = entry.hooks.filter(hook => !(hook.type === 'command' && hook.command === toggleConfig.command));
+      if (hooks.length === 0) {
+        return null;
+      }
+      return { ...entry, hooks };
+    })
+    .filter(Boolean);
+}
+
+function ensureSystemNotificationHookEnabled(entries, toggleConfig) {
+  if (hasSystemNotificationHook(entries, toggleConfig)) {
+    return entries;
+  }
+
+  return [
+    ...entries,
+    {
+      ...(toggleConfig.matcher ? { matcher: toggleConfig.matcher } : {}),
+      hooks: [{ type: 'command', command: toggleConfig.command }],
+    },
+  ];
+}
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -605,6 +687,150 @@ app.get('/api/listener-status', async (req, res) => {
     fswatchInstalled,
     running
   });
+});
+
+// Get Claude Code system notifications status
+app.get('/api/notification-status', async (req, res) => {
+  try {
+    const settings = await readClaudeSettings();
+    const preferredNotifChannel = settings.preferredNotifChannel ?? null;
+    const enabled = preferredNotifChannel !== NOTIFICATIONS_DISABLED_CHANNEL;
+
+    res.json({
+      enabled,
+      preferredNotifChannel,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Toggle Claude Code system notifications on/off
+app.post('/api/toggle-notifications', async (req, res) => {
+  try {
+    const settings = await readClaudeSettings();
+    const currentChannel = settings.preferredNotifChannel;
+    const currentlyDisabled = currentChannel === NOTIFICATIONS_DISABLED_CHANNEL;
+
+    if (currentlyDisabled) {
+      // Restore the previous channel when turning notifications back on.
+      let previousChannel = '__unset__';
+      if (existsSync(CLAUDE_PREV_NOTIF_CHANNEL_FILE)) {
+        previousChannel = (await readFile(CLAUDE_PREV_NOTIF_CHANNEL_FILE, 'utf-8')).trim() || '__unset__';
+      }
+
+      if (previousChannel === '__unset__') {
+        delete settings.preferredNotifChannel;
+      } else if (previousChannel === NOTIFICATIONS_DISABLED_CHANNEL) {
+        settings.preferredNotifChannel = 'terminal_bell';
+      } else {
+        settings.preferredNotifChannel = previousChannel;
+      }
+
+      if (!existsSync(CLAUDE_SYSTEM_NOTIFS_INITIALIZED_FILE)) {
+        if (!settings.hooks) {
+          settings.hooks = {};
+        }
+
+        for (const config of Object.values(SYSTEM_NOTIFICATION_TOGGLES)) {
+          const entries = settings.hooks[config.event] || [];
+          settings.hooks[config.event] = ensureSystemNotificationHookEnabled(entries, config);
+        }
+      }
+
+      await writeClaudeSettings(settings);
+      if (existsSync(CLAUDE_PREV_NOTIF_CHANNEL_FILE)) {
+        await unlink(CLAUDE_PREV_NOTIF_CHANNEL_FILE);
+      }
+      if (!existsSync(CLAUDE_SYSTEM_NOTIFS_INITIALIZED_FILE)) {
+        await writeFile(CLAUDE_SYSTEM_NOTIFS_INITIALIZED_FILE, '1');
+      }
+
+      return res.json({
+        success: true,
+        enabled: true,
+        preferredNotifChannel: settings.preferredNotifChannel ?? null,
+      });
+    }
+
+    const channelToSave = currentChannel || '__unset__';
+    await writeFile(CLAUDE_PREV_NOTIF_CHANNEL_FILE, channelToSave);
+    settings.preferredNotifChannel = NOTIFICATIONS_DISABLED_CHANNEL;
+    await writeClaudeSettings(settings);
+
+    return res.json({
+      success: true,
+      enabled: false,
+      preferredNotifChannel: settings.preferredNotifChannel,
+    });
+  } catch (error) {
+    console.error('Toggle notifications error:', error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+// Get per-hook system notification status
+app.get('/api/system-notification-hooks-status', async (req, res) => {
+  try {
+    const settings = await readClaudeSettings();
+    const hooks = settings.hooks || {};
+
+    const status = {};
+    for (const [key, config] of Object.entries(SYSTEM_NOTIFICATION_TOGGLES)) {
+      const entries = hooks[config.event] || [];
+      status[key] = hasSystemNotificationHook(entries, config);
+    }
+
+    res.json(status);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Toggle a single system notification hook on/off
+app.post('/api/toggle-system-notification-hook', async (req, res) => {
+  const { hook } = req.body || {};
+  const config = SYSTEM_NOTIFICATION_TOGGLES[hook];
+
+  if (!config) {
+    return res.status(400).json({ error: `Invalid hook. Must be one of: ${Object.keys(SYSTEM_NOTIFICATION_TOGGLES).join(', ')}` });
+  }
+
+  try {
+    const settings = await readClaudeSettings();
+    if (!settings.hooks) {
+      settings.hooks = {};
+    }
+
+    const entries = settings.hooks[config.event] || [];
+    const isEnabled = hasSystemNotificationHook(entries, config);
+
+    if (isEnabled) {
+      settings.hooks[config.event] = removeSystemNotificationHook(entries, config);
+    } else {
+      settings.hooks[config.event] = [
+        ...entries,
+        {
+          ...(config.matcher ? { matcher: config.matcher } : {}),
+          hooks: [{ type: 'command', command: config.command }],
+        },
+      ];
+    }
+
+    await writeClaudeSettings(settings);
+
+    const updatedEntries = settings.hooks[config.event] || [];
+    const enabled = hasSystemNotificationHook(updatedEntries, config);
+
+    return res.json({
+      success: true,
+      hook,
+      enabled,
+    });
+  } catch (error) {
+    console.error('Toggle system notification hook error:', error);
+    return res.status(500).json({ error: error.message });
+  }
 });
 
 // Toggle sounds on/off (mirrors cst command)

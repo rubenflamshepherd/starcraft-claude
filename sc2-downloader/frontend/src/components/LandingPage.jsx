@@ -35,20 +35,53 @@ export default function LandingPage() {
   const [currentStep, setCurrentStep] = useState(null);
   const [setupResult, setSetupResult] = useState(null);
   const [isToggling, setIsToggling] = useState(false);
+  const [notificationHooks, setNotificationHooks] = useState({
+    permissionPrompt: false,
+    question: false,
+    stop: false,
+  });
+  const [togglingNotificationHook, setTogglingNotificationHook] = useState(null);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [isTogglingNotifications, setIsTogglingNotifications] = useState(false);
 
   const refreshStatus = async () => {
     try {
-      const [listenerRes, hooksRes, soundsRes] = await Promise.all([
+      const [listenerResult, hooksResult, soundsResult, notificationHooksResult, notificationsMasterResult] = await Promise.allSettled([
         fetch('http://localhost:3001/api/listener-status'),
         fetch('http://localhost:3001/api/hooks-status'),
         fetch('http://localhost:3001/api/sounds-info'),
+        fetch('http://localhost:3001/api/system-notification-hooks-status'),
+        fetch('http://localhost:3001/api/notification-status'),
       ]);
-      setListenerStatus(await listenerRes.json());
-      setHooksStatus(await hooksRes.json());
-      const soundsInfo = await soundsRes.json();
-      // Check if all folders exist and have files
-      const allFoldersExist = soundsInfo.folders?.every(f => f.exists);
-      setSoundsStatus({ configured: allFoldersExist });
+
+      if (listenerResult.status === 'fulfilled' && listenerResult.value.ok) {
+        setListenerStatus(await listenerResult.value.json());
+      }
+
+      if (hooksResult.status === 'fulfilled' && hooksResult.value.ok) {
+        setHooksStatus(await hooksResult.value.json());
+      }
+
+      if (soundsResult.status === 'fulfilled' && soundsResult.value.ok) {
+        const soundsInfo = await soundsResult.value.json();
+        // Check if all required sound folders exist
+        const allFoldersExist = soundsInfo.folders?.every(f => f.exists);
+        setSoundsStatus({ configured: Boolean(allFoldersExist) });
+      }
+
+      if (notificationHooksResult.status === 'fulfilled' && notificationHooksResult.value.ok) {
+        const hooksInfo = await notificationHooksResult.value.json();
+        setNotificationHooks({
+          permissionPrompt: Boolean(hooksInfo.permissionPrompt),
+          question: Boolean(hooksInfo.question),
+          stop: Boolean(hooksInfo.stop),
+        });
+      }
+
+      if (notificationsMasterResult.status === 'fulfilled' && notificationsMasterResult.value.ok) {
+        const masterInfo = await notificationsMasterResult.value.json();
+        setNotificationsEnabled(masterInfo.enabled !== false);
+      }
     } catch {
       // Ignore errors
     }
@@ -67,6 +100,45 @@ export default function LandingPage() {
       console.error('Toggle failed:', error);
     } finally {
       setIsToggling(false);
+    }
+  };
+
+  const handleToggleNotificationHook = async (hook) => {
+    setTogglingNotificationHook(hook);
+    try {
+      const response = await fetch('http://localhost:3001/api/toggle-system-notification-hook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ hook }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to toggle notifications');
+      }
+      const data = await response.json();
+      setNotificationHooks(prev => ({
+        ...prev,
+        [hook]: Boolean(data.enabled),
+      }));
+    } catch (error) {
+      console.error('Notifications toggle failed:', error);
+    } finally {
+      setTogglingNotificationHook(null);
+    }
+  };
+
+  const handleToggleNotificationsMaster = async () => {
+    setIsTogglingNotifications(true);
+    try {
+      const response = await fetch('http://localhost:3001/api/toggle-notifications', { method: 'POST' });
+      if (!response.ok) {
+        throw new Error('Failed to toggle notifications');
+      }
+      await response.json();
+      await refreshStatus();
+    } catch (error) {
+      console.error('Master notifications toggle failed:', error);
+    } finally {
+      setIsTogglingNotifications(false);
     }
   };
 
@@ -231,66 +303,117 @@ export default function LandingPage() {
           </button>
         </div>
 
-        {/* Status Indicators */}
-        <div className="flex items-center justify-center gap-6 mt-6">
-          <StatusIndicator
-            label="Hooks"
-            tooltip={hooksTooltip}
-            dotClassName={
-              currentStep === 'hooks'
-                ? 'bg-amber-400 animate-pulse'
-                : hooksStatus?.allConfigured
-                  ? 'bg-green-400'
-                  : 'bg-gray-600'
-            }
-          />
-          <StatusIndicator
-            label="Sounds"
-            tooltip={soundsTooltip}
-            dotClassName={
-              currentStep === 'sounds'
-                ? 'bg-amber-400 animate-pulse'
-                : soundsStatus?.configured
-                  ? 'bg-green-400'
-                  : 'bg-gray-600'
-            }
-          />
-          <StatusIndicator
-            label="Listener"
-            tooltip={listenerTooltip}
-            dotClassName={
-              currentStep === 'listener'
-                ? 'bg-amber-400 animate-pulse'
-                : listenerStatus?.scriptInstalled
-                  ? 'bg-green-400'
-                  : 'bg-gray-600'
-            }
-          />
-          <StatusIndicator
-            label={shellConfigName}
-            tooltip={shellConfigTooltip}
-            dotClassName={listenerStatus?.inShellConfig ? 'bg-green-400' : 'bg-gray-600'}
-          />
-          {listenerStatus?.scriptInstalled && (
-            <div className="flex items-center gap-2 ml-4 pl-4 border-l border-gray-700">
+        {/* Status + Toggles */}
+        <div className="mt-6 mx-auto max-w-4xl space-y-3">
+          <div className="flex items-center justify-center gap-6 flex-wrap rounded-lg border border-gray-800 bg-gray-900/40 px-4 py-3">
+            <StatusIndicator
+              label="Hooks"
+              tooltip={hooksTooltip}
+              dotClassName={
+                currentStep === 'hooks'
+                  ? 'bg-amber-400 animate-pulse'
+                  : hooksStatus?.allConfigured
+                    ? 'bg-green-400'
+                    : 'bg-gray-600'
+              }
+            />
+            <StatusIndicator
+              label="Sounds"
+              tooltip={soundsTooltip}
+              dotClassName={
+                currentStep === 'sounds'
+                  ? 'bg-amber-400 animate-pulse'
+                  : soundsStatus?.configured
+                    ? 'bg-green-400'
+                    : 'bg-gray-600'
+              }
+            />
+            <StatusIndicator
+              label="Listener"
+              tooltip={listenerTooltip}
+              dotClassName={
+                currentStep === 'listener'
+                  ? 'bg-amber-400 animate-pulse'
+                  : listenerStatus?.scriptInstalled
+                    ? 'bg-green-400'
+                    : 'bg-gray-600'
+              }
+            />
+            <StatusIndicator
+              label={shellConfigName}
+              tooltip={shellConfigTooltip}
+              dotClassName={listenerStatus?.inShellConfig ? 'bg-green-400' : 'bg-gray-600'}
+            />
+          </div>
+
+          <div className="flex items-center justify-center gap-3 rounded-lg border border-gray-800 bg-gray-900/40 px-4 py-3">
+            <span className="text-sm text-gray-400">Sounds</span>
+            <button
+              onClick={handleToggleSounds}
+              disabled={isToggling || !listenerStatus?.scriptInstalled}
+              className={`relative h-6 w-11 rounded-full transition-colors ${
+                listenerStatus?.running ? 'bg-green-500' : 'bg-gray-600'
+              } ${isToggling || !listenerStatus?.scriptInstalled ? 'opacity-50' : ''}`}
+            >
+              <span
+                className={`absolute top-1 h-4 w-4 rounded-full bg-white transition-all ${
+                  listenerStatus?.running ? 'left-6' : 'left-1'
+                }`}
+              />
+            </button>
+            <span className="min-w-[78px] whitespace-nowrap text-sm text-gray-400 text-left">
+              {!listenerStatus?.scriptInstalled ? 'Not Installed' : isToggling ? 'Toggling...' : listenerStatus?.running ? 'On' : 'Off'}
+            </span>
+          </div>
+
+          <div className="flex items-center justify-center gap-4 flex-wrap rounded-lg border border-gray-800 bg-gray-900/40 px-4 py-3">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-400 whitespace-nowrap">System Notifications</span>
               <button
-                onClick={handleToggleSounds}
-                disabled={isToggling}
-                className={`relative w-11 h-6 rounded-full transition-colors ${
-                  listenerStatus?.running ? 'bg-green-500' : 'bg-gray-600'
-                } ${isToggling ? 'opacity-50' : ''}`}
+                onClick={handleToggleNotificationsMaster}
+                disabled={isTogglingNotifications}
+                className={`relative h-6 w-11 rounded-full transition-colors ${
+                  notificationsEnabled ? 'bg-green-500' : 'bg-gray-600'
+                } ${isTogglingNotifications ? 'opacity-50' : ''}`}
               >
                 <span
-                  className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                    listenerStatus?.running ? 'left-6' : 'left-1'
+                  className={`absolute top-1 h-4 w-4 rounded-full bg-white transition-all ${
+                    notificationsEnabled ? 'left-6' : 'left-1'
                   }`}
                 />
               </button>
-              <span className="text-sm text-gray-400">
-                {isToggling ? 'Toggling...' : listenerStatus?.running ? 'Sounds On' : 'Sounds Off'}
-              </span>
             </div>
-          )}
+
+            <div className={`h-5 w-px bg-gray-700 ${notificationsEnabled ? '' : 'opacity-50'}`} />
+
+            {[
+              { key: 'permissionPrompt', label: 'Permission' },
+              { key: 'question', label: 'Question' },
+              { key: 'stop', label: 'Stop' },
+            ].map(({ key, label }) => {
+              const savedEnabled = notificationHooks[key];
+              const displayEnabled = notificationsEnabled && savedEnabled;
+
+              return (
+                <div key={key} className="flex items-center gap-2">
+                  <span className={`text-sm whitespace-nowrap ${notificationsEnabled ? 'text-gray-400' : 'text-gray-500'}`}>{label}</span>
+                  <button
+                    onClick={() => handleToggleNotificationHook(key)}
+                    disabled={!notificationsEnabled || togglingNotificationHook === key}
+                    className={`relative h-6 w-11 rounded-full transition-colors ${
+                      displayEnabled ? 'bg-green-500' : 'bg-gray-600'
+                    } ${togglingNotificationHook === key ? 'opacity-50' : ''}`}
+                  >
+                    <span
+                      className={`absolute top-1 h-4 w-4 rounded-full bg-white transition-all ${
+                        displayEnabled ? 'left-6' : 'left-1'
+                      }`}
+                    />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
         </div>
         {setupResult && (
           <div className={`mt-4 px-4 py-2 rounded-lg text-sm ${
