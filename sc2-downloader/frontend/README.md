@@ -1,16 +1,59 @@
-# React + Vite
+# Frontend (Game Sounds Browser)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React UI for browsing game quotes and managing Claude Code sound lists.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- Vite
+- Tailwind CSS
+- `@dnd-kit` for drag-and-drop
 
-## React Compiler
+## Run
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+From `sc2-downloader/frontend`:
 
-## Expanding the ESLint configuration
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+App runs on `http://localhost:5173`.
+
+This frontend expects the API server at `http://localhost:3001`.
+
+## Available Scripts
+
+```bash
+npm run dev
+npm run build
+npm run preview
+npm run lint
+npm test
+npm run test:watch
+```
+
+## Key Features
+
+- Browse quotes by game, faction, unit, and category
+- Quote search across currently loaded sections
+- Audio preview and MP3 download via backend API
+- Multi-select quote actions:
+  - Download selected quotes as ZIP
+  - Save selected quotes to `~/.claude/sounds/<folder>`
+- Recommended setup view:
+  - Multiple named lists
+  - Drag-and-drop ordering per hook
+  - Move quotes between hook groups
+  - Import/export setup JSON (`{ "hooks": [...] }`)
+  - Sync active list to `~/.claude/sounds`
+- Landing page setup controls:
+  - Install Claude hooks
+  - Install listener script in shell config
+  - Toggle sounds and notification hooks
+
+## Data Files
+
+- Game registry: `src/data/games.json`
+- Quote datasets: `src/data/games/sc2.json`, `src/data/games/wc2.json`, `src/data/games/aoe3.json`
+- Default recommended setup: `src/data/recommendedSetup.json`
