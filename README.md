@@ -1,33 +1,12 @@
-# StarCraft Sounds for Claude Code
+# Claude Code Notifications Manager
 
-Use game voice lines as Claude Code sound cues. The app lets you browse quotes from multiple games, curate hook-specific sound lists, and sync MP3s into `~/.claude/sounds` so Claude events play random sounds.
-
-## What This Repo Contains
-
-- `claude-code-notif-manager/frontend`: React + Vite UI for browsing quotes and managing lists
-- `claude-code-notif-manager/server`: Express API for audio proxying, OGG->MP3 conversion, sync, and setup
-- `claude-code-notif-manager/claude-sounds.zsh` / `claude-code-notif-manager/claude-sounds.bash`: shell watcher scripts
-- `claude-code-notif-manager/scripts`: scrapers that generate `frontend/src/data/games/*.json`
-
-## Hook Events and Folders
-
-Claude hooks write trigger files under `~/.claude`, and the watcher plays a random file from the matching folder:
-
-| Hook Event | Trigger File | Sounds Folder |
-| --- | --- | --- |
-| `SessionStart` | `~/.claude/.claude-start` | `~/.claude/sounds/start` |
-| `UserPromptSubmit` | `~/.claude/.claude-prompt` | `~/.claude/sounds/userpromptsubmit` |
-| `Stop` | `~/.claude/.claude-done` | `~/.claude/sounds/done` |
-| `PreCompact` | `~/.claude/.claude-compact` | `~/.claude/sounds/precompact` |
-| `PermissionPrompt` | `~/.claude/.claude-permission` | `~/.claude/sounds/permission` |
-| `Question` | `~/.claude/.claude-question` | `~/.claude/sounds/question` |
+Use iconic sounds from Starcraft, Warcraft, AoE and more as Claude Code sound cues. Easily customize and manage Claude Code's audio and system notifications. One-click setup once you clone the and run the local web server.
 
 ## Prerequisites
 
 - Node.js 18+
 - `ffmpeg` (audio conversion)
 - `fswatch` (watcher triggers)
-- macOS audio tools (`afplay`/`osascript`) for local playback + system notification commands
 
 ```bash
 brew install ffmpeg fswatch
@@ -36,6 +15,7 @@ brew install ffmpeg fswatch
 ## Quick Start
 
 ```bash
+# From project root (claude-code-notif-manager/)
 cd claude-code-notif-manager
 npm run install:all
 npm run dev
@@ -45,7 +25,7 @@ Open `http://localhost:5173`.
 
 Then use **One-Click Setup** on the landing page. It runs:
 
-1. `POST /api/setup-hooks` (installs Claude hook commands in `~/.claude/settings.json`)
+1. Installs Claude hook commands in `~/.claude/settings.json`
 2. Syncs default recommended sounds to `~/.claude/sounds`
 3. Installs `~/.claude-sounds.zsh` or `~/.claude-sounds.bash` and updates shell config
 
@@ -63,6 +43,19 @@ Restart your terminal after first setup.
 - Drag to reorder recommendations within a hook and move between hooks
 - Import/export list setup JSON (`{ "hooks": [...] }`)
 - Toggle watcher and Claude system notifications from the landing page
+
+## Hook Events and Folders
+
+Claude hooks write trigger files under `~/.claude`, and the watcher plays a random file from the matching folder:
+
+| Hook Event | Trigger File | Sounds Folder |
+| --- | --- | --- |
+| `SessionStart` | `~/.claude/.claude-start` | `~/.claude/sounds/start` |
+| `UserPromptSubmit` | `~/.claude/.claude-prompt` | `~/.claude/sounds/userpromptsubmit` |
+| `Stop` | `~/.claude/.claude-done` | `~/.claude/sounds/done` |
+| `PreCompact` | `~/.claude/.claude-compact` | `~/.claude/sounds/precompact` |
+| `PermissionPrompt` | `~/.claude/.claude-permission` | `~/.claude/sounds/permission` |
+| `Question` | `~/.claude/.claude-question` | `~/.claude/sounds/question` |
 
 ## Shell Commands
 
