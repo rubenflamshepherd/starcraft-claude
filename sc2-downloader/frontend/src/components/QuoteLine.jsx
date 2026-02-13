@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useSelection } from '../contexts/SelectionContext';
+import { useNotifications } from '../contexts/NotificationContext';
 import { getFactionStyles } from '../utils/factionStyles';
 
 // Create a filename-safe suffix from quote text (max ~50 chars)
@@ -20,6 +21,7 @@ function createQuoteSuffix(text, maxLength = 50) {
 
 export default function QuoteLine({ quote, race = 'protoss', unitName = '', categoryName = '', recommendedSetup = null, onAddRecommendation = null, game = 'sc2' }) {
   const { isSelected, toggleSelection, selectedCount } = useSelection();
+  const { pushNotification } = useNotifications();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -85,7 +87,7 @@ export default function QuoteLine({ quote, race = 'protoss', unitName = '', cate
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error('Download error:', error);
-      alert('Download failed. Make sure the backend server is running.');
+      pushNotification('Download failed. Make sure the backend server is running.', 'error');
     } finally {
       setIsDownloading(false);
     }

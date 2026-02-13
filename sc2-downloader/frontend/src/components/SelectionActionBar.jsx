@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelection } from '../contexts/SelectionContext';
+import { useNotifications } from '../contexts/NotificationContext';
 
 const SOUND_FOLDERS = [
   { value: 'done', label: 'done', description: 'When Claude finishes' },
@@ -10,14 +11,13 @@ const SOUND_FOLDERS = [
 
 function extractFilename(audioUrl) {
   const urlParts = audioUrl.split('/');
-  return urlParts.find(part => part.endsWith('.ogg')) || 'audio.ogg';
+  return urlParts.find((part) => part.endsWith('.ogg')) || 'audio.ogg';
 }
 
 function sanitizeFilename(name) {
   return name.replace(/[<>:"/\\|?*]/g, '_');
 }
 
-// Create a filename-safe suffix from quote text (max ~50 chars)
 function createQuoteSuffix(text, maxLength = 50) {
   if (!text) return '';
   const sanitized = text
@@ -25,6 +25,7 @@ function createQuoteSuffix(text, maxLength = 50) {
     .replace(/['\u2018\u2019]/g, '')
     .replace(/[.,!;:]+$/g, '')
     .trim();
+
   if (sanitized.length <= maxLength) return sanitized;
   const truncated = sanitized.slice(0, maxLength);
   const lastSpace = truncated.lastIndexOf(' ');
@@ -33,34 +34,33 @@ function createQuoteSuffix(text, maxLength = 50) {
 
 export default function SelectionActionBar() {
   const { selectedCount, selectedArray, clearSelection } = useSelection();
+  const { pushNotification } = useNotifications();
+
   const [isDownloading, setIsDownloading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState('done');
   const [saveResult, setSaveResult] = useState(null);
 
-  // Clear save result after 3 seconds
   useEffect(() => {
-    if (saveResult) {
-      const timer = setTimeout(() => setSaveResult(null), 3000);
-      return () => clearTimeout(timer);
-    }
+    if (!saveResult) return undefined;
+    const timer = setTimeout(() => setSaveResult(null), 3000);
+    return () => clearTimeout(timer);
   }, [saveResult]);
 
   if (selectedCount === 0) return null;
 
-  const prepareQuotes = () => {
-    return selectedArray.map(item => {
-      const baseName = extractFilename(item.quote.audioUrl).replace('.ogg', '');
-      const quoteSuffix = createQuoteSuffix(item.quote.text);
-      const filename = quoteSuffix ? `${baseName} - ${quoteSuffix}.mp3` : `${baseName}.mp3`;
-      return {
-        audioUrl: item.quote.audioUrl,
-        filename,
-        unitName: sanitizeFilename(item.unitName),
-        categoryName: sanitizeFilename(item.categoryName),
-      };
-    });
-  };
+  const prepareQuotes = () => selectedArray.map((item) => {
+    const baseName = extractFilename(item.quote.audioUrl).replace('.ogg', '');
+    const quoteSuffix = createQuoteSuffix(item.quote.text);
+    const filename = quoteSuffix ? `${baseName} - ${quoteSuffix}.mp3` : `${baseName}.mp3`;
+
+    return {
+      audioUrl: item.quote.audioUrl,
+      filename,
+      unitName: sanitizeFilename(item.unitName),
+      categoryName: sanitizeFilename(item.categoryName),
+    };
+  });
 
   const handleSaveToSounds = async () => {
     setIsSaving(true);
@@ -82,9 +82,11 @@ export default function SelectionActionBar() {
 
       setSaveResult({ success: true, saved: result.saved, targetDir: result.targetDir });
       clearSelection();
+      pushNotification(`Saved ${result.saved} file${result.saved === 1 ? '' : 's'} to ${selectedFolder}.`, 'success');
     } catch (error) {
       console.error('Save error:', error);
       setSaveResult({ success: false, error: error.message });
+      pushNotification(`Save failed: ${error.message}`, 'error');
     } finally {
       setIsSaving(false);
     }
@@ -95,7 +97,6 @@ export default function SelectionActionBar() {
 
     try {
       const quotes = prepareQuotes();
-
       const response = await fetch('http://localhost:3001/api/download-batch', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -106,108 +107,65 @@ export default function SelectionActionBar() {
 
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'sc2-quotes.zip';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = 'sc2-quotes.zip';
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
       window.URL.revokeObjectURL(url);
 
       clearSelection();
+      pushNotification('Batch ZIP downloaded.', 'success');
     } catch (error) {
       console.error('Batch download error:', error);
-      alert('Batch download failed. Make sure the backend server is running.');
+      pushNotification('Batch download failed. Make sure the backend server is running.', 'error');
     } finally {
       setIsDownloading(false);
     }
   };
 
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-900 border border-gray-700 rounded-lg shadow-xl px-6 py-3 flex items-center gap-4 z-50">
-      <span className="text-gray-300">
-        {selectedCount} quote{selectedCount !== 1 ? 's' : ''} selected
-      </span>
-      <button
-        onClick={clearSelection}
-        className="text-gray-400 hover:text-white transition-colors"
-      >
-        Clear
-      </button>
+    <div className="surface-panel fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3 rounded-xl px-4 py-3 shadow-2xl">
+      <span className="text-sm text-slate-300">{selectedCount} quote{selectedCount === 1 ? '' : 's'} selected</span>
+      <button type="button" onClick={clearSelection} className="text-sm text-slate-400 hover:text-white">Clear</button>
 
-      {/* Folder selector and save button */}
-      <div className="flex items-center gap-2 border-l border-gray-700 pl-4">
+      <div className="ml-1 flex items-center gap-2 border-l border-white/15 pl-3">
         <select
           value={selectedFolder}
           onChange={(e) => setSelectedFolder(e.target.value)}
-          className="bg-gray-800 text-gray-300 border border-gray-600 rounded px-2 py-1.5 text-sm"
+          className="rounded-md border border-white/15 bg-slate-900 px-2 py-1.5 text-sm text-slate-200"
         >
-          {SOUND_FOLDERS.map(folder => (
-            <option key={folder.value} value={folder.value}>
-              {folder.label}
-            </option>
+          {SOUND_FOLDERS.map((folder) => (
+            <option key={folder.value} value={folder.value}>{folder.label}</option>
           ))}
         </select>
+
         <button
+          type="button"
           onClick={handleSaveToSounds}
           disabled={isSaving}
-          className="bg-green-600 hover:bg-green-700 disabled:bg-green-800 disabled:cursor-wait text-white px-4 py-2 rounded transition-colors flex items-center gap-2"
+          className="rounded-md bg-green-600 px-3 py-1.5 text-sm text-white transition-colors hover:bg-green-500 disabled:cursor-wait disabled:bg-green-800"
           title={`Save to ~/.claude/sounds/${selectedFolder}/`}
         >
-          {isSaving ? (
-            <>
-              <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-              </svg>
-              Saving...
-            </>
-          ) : (
-            <>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
-              </svg>
-              Save to Sounds
-            </>
-          )}
+          {isSaving ? 'Saving...' : 'Save to Sounds'}
         </button>
       </div>
 
-      {/* Download ZIP button */}
       <button
+        type="button"
         onClick={handleBatchDownload}
         disabled={isDownloading}
-        className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 disabled:cursor-wait text-white px-4 py-2 rounded transition-colors flex items-center gap-2"
+        className="rounded-md bg-sky-600 px-3 py-1.5 text-sm text-white transition-colors hover:bg-sky-500 disabled:cursor-wait disabled:bg-sky-800"
       >
-        {isDownloading ? (
-          <>
-            <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-            </svg>
-            Downloading...
-          </>
-        ) : (
-          <>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-            Download ZIP
-          </>
-        )}
+        {isDownloading ? 'Downloading...' : 'Download ZIP'}
       </button>
 
-      {/* Save result toast */}
-      {saveResult && (
-        <div className={`absolute -top-12 left-1/2 -translate-x-1/2 px-4 py-2 rounded text-sm ${
-          saveResult.success ? 'bg-green-800 text-green-100' : 'bg-red-800 text-red-100'
-        }`}>
-          {saveResult.success
-            ? `Saved ${saveResult.saved} file${saveResult.saved !== 1 ? 's' : ''}`
-            : `Error: ${saveResult.error}`
-          }
+      {saveResult ? (
+        <div className={`absolute -top-11 left-1/2 -translate-x-1/2 rounded px-3 py-1.5 text-xs ${saveResult.success ? 'bg-green-800 text-green-100' : 'bg-red-800 text-red-100'}`}>
+          {saveResult.success ? `Saved ${saveResult.saved} file${saveResult.saved === 1 ? '' : 's'}` : `Error: ${saveResult.error}`}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

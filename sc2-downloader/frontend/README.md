@@ -1,16 +1,28 @@
-# React + Vite
+# SC2 Downloader Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite frontend for browsing game quotes and building Claude Code sound setups.
 
-Currently, two official plugins are available:
+## UI Architecture (Catalyst-style)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `src/layouts/AppShell.jsx`: Responsive app shell with mobile drawer + desktop sidebar.
+- `src/hooks/useQuotesAppState.js`: Central app state and list persistence orchestration.
+- `src/components/Sidebar.jsx`: Navigation, game/faction switching, section browsing, search.
+- `src/components/UnitPanel.jsx`: Top-level content router for home/search/setup/unit views.
+- `src/components/recommended/`: Setup-specific panels (`SetupActionsPanel`, `RecommendedHooksPanel`).
+- `src/components/units/UnitQuotesPanel.jsx`: Unit-level quote browsing.
+- `src/components/quotes/QuoteResultsPanel.jsx`: Quote search result entrypoint.
+- `src/contexts/NotificationContext.jsx`: In-app notifications (replaces alert/prompt UX).
 
-## React Compiler
+## Styling
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Tailwind CSS v4 with custom faction colors in `src/index.css`.
+- Shared UI tokens and surface styles in `src/styles/theme.css`.
 
-## Expanding the ESLint configuration
+## Scripts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `npm run dev`: start local development server.
+- `npm run build`: production build.
+- `npm run preview`: preview production build.
+- `npm run lint`: run ESLint.
+- `npm run test`: run Vitest tests once.
+- `npm run test:watch`: run Vitest in watch mode.

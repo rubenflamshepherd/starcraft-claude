@@ -1,15 +1,13 @@
 import { useState } from 'react';
-import QuoteCategory from './QuoteCategory';
-import QuoteSearchResults from './QuoteSearchResults';
-import SelectionActionBar from './SelectionActionBar';
-import QuoteLine from './QuoteLine';
-import LandingPage from './LandingPage';
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
-import { getFactionStyles } from '../utils/factionStyles';
+import LandingPage from './LandingPage';
+import SelectionActionBar from './SelectionActionBar';
+import RecommendedHooksPanel from './recommended/RecommendedHooksPanel';
+import SetupActionsPanel from './recommended/SetupActionsPanel';
+import UnitQuotesPanel from './units/UnitQuotesPanel';
+import QuoteResultsPanel from './quotes/QuoteResultsPanel';
+import { useNotifications } from '../contexts/NotificationContext';
 
 const HOOK_TO_FOLDER = {
   SessionStart: 'start',
@@ -20,82 +18,34 @@ const HOOK_TO_FOLDER = {
   Question: 'question',
 };
 
-function SortableRecommendation({ rec, hook, hookNames, onMoveRecommendation, onRemoveRecommendation }) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: rec.audioUrl });
+export default function UnitPanel({
+  unit,
+  race = 'protoss',
+  sections = [],
+  quoteSearchQuery = '',
+  isHomeView = false,
+  isRecommendedView = false,
+  recommendedSetup = null,
+  onRemoveRecommendation = null,
+  onMoveRecommendation = null,
+  onReorderRecommendations = null,
+  onAddRecommendation = null,
+  onImportSetup = null,
+  onNavigate = null,
+  selectedGame = null,
+  lists = [],
+  activeListId = 'default',
+  onCreateList = null,
+  onDeleteList = null,
+  onRenameList = null,
+  onSetActiveList = null,
+}) {
+  const { pushNotification } = useNotifications();
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    opacity: isDragging ? 0.5 : 1,
-  };
-
-  return (
-    <div ref={setNodeRef} style={style} className="border-b border-gray-700/20 last:border-b-0 group/rec">
-      <div className="flex items-center gap-2 px-3 pt-2">
-        <button
-          {...attributes}
-          {...listeners}
-          className="cursor-grab active:cursor-grabbing p-1 text-gray-500 hover:text-gray-300"
-          title="Drag to reorder"
-        >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
-          </svg>
-        </button>
-        <span className={`text-xs px-2 py-0.5 rounded ${getFactionStyles(rec.race).badgeBg} ${getFactionStyles(rec.race).primaryClass}`}>
-          {rec.unit}
-        </span>
-        <div className="ml-auto flex items-center gap-1 opacity-0 group-hover/rec:opacity-100 transition-opacity">
-          {hookNames.filter(name => name !== hook.name).map(targetHook => (
-            <button
-              key={targetHook}
-              onClick={() => onMoveRecommendation?.(hook.name, targetHook, rec)}
-              className="px-2 py-0.5 text-xs rounded bg-amber-500/20 text-amber-400 hover:bg-amber-500/40 transition-colors"
-              title={`Move to ${targetHook}`}
-            >
-              {targetHook}
-            </button>
-          ))}
-          <button
-            onClick={() => onRemoveRecommendation?.(hook.name, rec.audioUrl)}
-            className="p-1 rounded hover:bg-red-500/20"
-            title="Remove from recommendations"
-          >
-            <svg className="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <QuoteLine
-        quote={{ text: rec.text, audioUrl: rec.audioUrl }}
-        race={rec.race}
-        unitName={rec.unit}
-        categoryName={hook.name}
-      />
-    </div>
-  );
-}
-
-export default function UnitPanel({ unit, race = 'protoss', sections = [], quoteSearchQuery = '', isHomeView = false, isRecommendedView = false, recommendedSetup = null, onRemoveRecommendation = null, onMoveRecommendation = null, onReorderRecommendations = null, onAddRecommendation = null, onImportSetup = null, onNavigate = null, selectedGame = null, lists = [], activeListId = 'default', onCreateList = null, onDeleteList = null, onRenameList = null, onSetActiveList = null }) {
-  // Use unit's race for styling when available (for "all" tab), otherwise use selected race
-  const effectiveRace = unit?.race || race;
-  const primaryClass = getFactionStyles(effectiveRace).primaryClass;
-
-  // Drag and drop sensors (must be at top level)
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
-  );
-
-  // Download all state
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState({ current: 0, total: 0 });
-
-  // Save to .claude state
   const [isSaving, setIsSaving] = useState(false);
   const [saveResult, setSaveResult] = useState(null);
-  const [showSettingsMenu, setShowSettingsMenu] = useState(false);
 
   const handleDownloadAll = async () => {
     if (!recommendedSetup?.hooks) return;
@@ -103,7 +53,6 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
     setIsDownloading(true);
     const zip = new JSZip();
 
-    // Count total files
     const totalFiles = recommendedSetup.hooks.reduce((sum, hook) => sum + hook.recommendations.length, 0);
     setDownloadProgress({ current: 0, total: totalFiles });
 
@@ -115,16 +64,13 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
 
       for (const rec of hook.recommendations) {
         try {
-          // Extract filename from URL
           const urlMatch = rec.audioUrl.match(/\/([^/]+)\.ogg\//);
           const baseFilename = urlMatch ? urlMatch[1] : `audio_${currentFile}`;
           const filename = `${baseFilename} - ${rec.text.replace(/[/\\:*?"<>|]/g, '')}.mp3`;
 
-          // Fetch via download API
           const downloadUrl = `http://localhost:3001/api/download?url=${encodeURIComponent(rec.audioUrl)}&filename=${encodeURIComponent(filename)}`;
           const response = await fetch(downloadUrl);
           const blob = await response.blob();
-
           folder.file(filename, blob);
         } catch (error) {
           console.error(`Failed to download ${rec.text}:`, error);
@@ -135,12 +81,12 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
       }
     }
 
-    // Generate and download zip
     const content = await zip.generateAsync({ type: 'blob' });
     saveAs(content, 'sc2-claude-sounds.zip');
 
     setIsDownloading(false);
     setDownloadProgress({ current: 0, total: 0 });
+    pushNotification('Setup ZIP downloaded.', 'success');
   };
 
   const handleSaveToSounds = async () => {
@@ -150,7 +96,6 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
     setSaveResult(null);
 
     try {
-      // Prepare all quotes grouped by hook/folder
       const allQuotes = [];
       for (const hook of recommendedSetup.hooks) {
         const folderName = HOOK_TO_FOLDER[hook.name] || hook.name.toLowerCase();
@@ -178,16 +123,13 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
         throw new Error(result.error || 'Save failed');
       }
 
-      setSaveResult({
-        success: true,
-        saved: result.saved,
-        skipped: result.skipped,
-        deleted: result.deleted
-      });
+      setSaveResult({ success: true, saved: result.saved, skipped: result.skipped, deleted: result.deleted });
       setTimeout(() => setSaveResult(null), 5000);
+      pushNotification(`Synced ${result.saved} new sound files.`, 'success');
     } catch (error) {
       console.error('Save error:', error);
       setSaveResult({ success: false, error: error.message });
+      pushNotification(`Sync failed: ${error.message}`, 'error');
       setTimeout(() => setSaveResult(null), 3000);
     } finally {
       setIsSaving(false);
@@ -195,18 +137,18 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
   };
 
   const handleExportSetup = () => {
-    // Export in backward-compatible { hooks } format
     const exportData = { hooks: recommendedSetup?.hooks || [] };
     const json = JSON.stringify(exportData, null, 2);
     const blob = new Blob([json], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'recommendedSetup.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = 'recommendedSetup.json';
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
     URL.revokeObjectURL(url);
+    pushNotification('Setup exported.', 'success');
   };
 
   const handleImportSetup = (event) => {
@@ -219,266 +161,77 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
         const imported = JSON.parse(e.target.result);
         if (imported?.hooks && Array.isArray(imported.hooks)) {
           onImportSetup?.(imported);
+          pushNotification('Setup imported.', 'success');
         } else {
-          alert('Invalid setup file format');
+          pushNotification('Invalid setup file format.', 'error');
         }
       } catch {
-        alert('Failed to parse JSON file');
+        pushNotification('Failed to parse JSON file.', 'error');
       }
     };
+
     reader.readAsText(file);
     event.target.value = '';
   };
 
-  // Show search results when there's a quote search query
   if (quoteSearchQuery) {
     return (
       <>
-        <QuoteSearchResults sections={sections} searchQuery={quoteSearchQuery} race={race} />
+        <QuoteResultsPanel sections={sections} searchQuery={quoteSearchQuery} race={race} />
         <SelectionActionBar />
       </>
     );
   }
 
-  // Home View - Landing Page
   if (isHomeView) {
     return <LandingPage onNavigate={onNavigate} />;
   }
 
-  // Recommended Setup View
   if (isRecommendedView) {
     const hooks = recommendedSetup?.hooks || [];
-    const hookNames = hooks.map(h => h.name);
-    const leftColumnHooks = hooks.filter((_, idx) => idx % 2 === 0);
-    const rightColumnHooks = hooks.filter((_, idx) => idx % 2 === 1);
-
-    const handleDragEnd = (hookName) => (event) => {
-      const { active, over } = event;
-      if (active.id !== over?.id) {
-        const hook = hooks.find(h => h.name === hookName);
-        const oldIndex = hook.recommendations.findIndex(r => r.audioUrl === active.id);
-        const newIndex = hook.recommendations.findIndex(r => r.audioUrl === over.id);
-        onReorderRecommendations?.(hookName, oldIndex, newIndex);
-      }
-    };
-
-    const renderHook = (hook) => (
-      <div key={hook.name} id={`hook-${hook.name}`} className="mb-8">
-        <div className="mb-3">
-          <h2 className="text-lg font-semibold text-amber-400">{hook.name}</h2>
-          <p className="text-sm text-gray-500">{hook.description}</p>
-        </div>
-        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd(hook.name)}>
-          <SortableContext items={hook.recommendations.map(r => r.audioUrl)} strategy={verticalListSortingStrategy}>
-            <div className="bg-gray-900/50 rounded-lg border border-gray-700/30">
-              {hook.recommendations.map((rec) => (
-                <SortableRecommendation
-                  key={rec.audioUrl}
-                  rec={rec}
-                  hook={hook}
-                  hookNames={hookNames}
-                  onMoveRecommendation={onMoveRecommendation}
-                  onRemoveRecommendation={onRemoveRecommendation}
-                />
-              ))}
-            </div>
-          </SortableContext>
-        </DndContext>
-      </div>
-    );
 
     return (
       <>
-        <div className="flex-1 overflow-y-auto p-6">
-          <div className="mb-6 flex items-start justify-between">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <select
-                  value={activeListId}
-                  onChange={(e) => onSetActiveList?.(e.target.value)}
-                  className="text-2xl font-bold text-amber-400 bg-transparent border-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-amber-400/50 rounded"
-                >
-                  {lists.map(list => (
-                    <option key={list.id} value={list.id} className="bg-gray-900 text-amber-400">
-                      {list.name}
-                    </option>
-                  ))}
-                </select>
-                <button
-                  onClick={() => {
-                    const name = window.prompt('New list name:');
-                    if (name?.trim()) onCreateList?.(name.trim());
-                  }}
-                  className="p-1.5 rounded-lg bg-amber-500/20 text-amber-400 hover:bg-amber-500/30 transition-colors"
-                  title="Create new list"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => {
-                    const currentName = lists.find(l => l.id === activeListId)?.name || '';
-                    const newName = window.prompt('Rename list:', currentName);
-                    if (newName?.trim() && newName.trim() !== currentName) onRenameList?.(activeListId, newName.trim());
-                  }}
-                  className="p-1.5 rounded-lg bg-gray-700/50 text-gray-300 hover:bg-gray-700 transition-colors"
-                  title="Rename list"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => {
-                    if (window.confirm(`Delete "${lists.find(l => l.id === activeListId)?.name}"? This cannot be undone.`)) {
-                      onDeleteList?.(activeListId);
-                    }
-                  }}
-                  disabled={activeListId === 'default'}
-                  className="p-1.5 rounded-lg bg-gray-700/50 text-gray-300 hover:bg-red-500/20 hover:text-red-400 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-gray-700/50 disabled:hover:text-gray-300"
-                  title={activeListId === 'default' ? 'Cannot delete default list' : 'Delete list'}
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                </button>
-              </div>
-              <p className="text-gray-400 text-sm">
-                {hooks.reduce((sum, h) => sum + h.recommendations.length, 0)} sounds across {hooks.length} hooks. Click to preview, download to use.
-              </p>
-            </div>
-            <div className="flex items-center gap-2 relative">
-              <button
-                onClick={handleSaveToSounds}
-                disabled={isSaving}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-500/20 text-green-400 hover:bg-green-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                title="Save directly to ~/.claude/sounds/"
-              >
-                {isSaving ? (
-                  <>
-                    <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                    <span>Saving...</span>
-                  </>
-                ) : (
-                  <>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
-                    </svg>
-                    <span>Sync to .claude</span>
-                  </>
-                )}
-              </button>
-              <div className="relative">
-                <button
-                  onClick={() => setShowSettingsMenu(!showSettingsMenu)}
-                  className="p-2 rounded-lg bg-gray-700/50 text-gray-300 hover:bg-gray-700 transition-colors"
-                  title="More options"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </button>
-                {showSettingsMenu && (
-                  <>
-                    <div className="fixed inset-0 z-40" onClick={() => setShowSettingsMenu(false)} />
-                    <div className="absolute right-0 top-full mt-2 w-48 bg-gray-800 border border-gray-700 rounded-lg shadow-xl z-50 py-1">
-                      <button
-                        onClick={() => { handleDownloadAll(); setShowSettingsMenu(false); }}
-                        disabled={isDownloading}
-                        className="w-full flex items-center gap-3 px-4 py-2 text-left text-gray-300 hover:bg-gray-700 disabled:opacity-50"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        {isDownloading ? `Downloading ${downloadProgress.current}/${downloadProgress.total}` : 'Download ZIP'}
-                      </button>
-                      <button
-                        onClick={() => { handleExportSetup(); setShowSettingsMenu(false); }}
-                        className="w-full flex items-center gap-3 px-4 py-2 text-left text-gray-300 hover:bg-gray-700"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        Export Setup JSON
-                      </button>
-                      <label className="w-full flex items-center gap-3 px-4 py-2 text-left text-gray-300 hover:bg-gray-700 cursor-pointer">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                        </svg>
-                        Import Setup JSON
-                        <input
-                          type="file"
-                          accept=".json"
-                          onChange={(e) => { handleImportSetup(e); setShowSettingsMenu(false); }}
-                          className="hidden"
-                        />
-                      </label>
-                    </div>
-                  </>
-                )}
-              </div>
-              {saveResult && (
-                <div className={`absolute -bottom-10 right-0 px-3 py-1.5 rounded text-sm whitespace-nowrap ${
-                  saveResult.success ? 'bg-green-800 text-green-100' : 'bg-red-800 text-red-100'
-                }`}>
-                  {saveResult.success
-                    ? `Synced: ${saveResult.saved} new, ${saveResult.skipped} existing, ${saveResult.deleted} removed`
-                    : `Error: ${saveResult.error}`
-                  }
-                </div>
-              )}
-            </div>
-          </div>
+        <div className="h-full overflow-y-auto px-5 py-5 md:px-6">
+          <SetupActionsPanel
+            lists={lists}
+            activeListId={activeListId}
+            hooks={hooks}
+            isSaving={isSaving}
+            isDownloading={isDownloading}
+            downloadProgress={downloadProgress}
+            saveResult={saveResult}
+            onSetActiveList={onSetActiveList}
+            onCreateList={onCreateList}
+            onRenameList={onRenameList}
+            onDeleteList={onDeleteList}
+            onSaveToSounds={handleSaveToSounds}
+            onDownloadAll={handleDownloadAll}
+            onExportSetup={handleExportSetup}
+            onImportSetup={handleImportSetup}
+          />
 
-          <div className="grid grid-cols-2 gap-6">
-            <div>
-              {leftColumnHooks.map(renderHook)}
-            </div>
-            <div>
-              {rightColumnHooks.map(renderHook)}
-            </div>
-          </div>
+          <RecommendedHooksPanel
+            hooks={hooks}
+            onMoveRecommendation={onMoveRecommendation}
+            onRemoveRecommendation={onRemoveRecommendation}
+            onReorderRecommendations={onReorderRecommendations}
+          />
         </div>
         <SelectionActionBar />
       </>
-    );
-  }
-
-  if (!unit) {
-    return (
-      <div className="flex-1 flex items-center justify-center text-gray-500">
-        <div className="text-center">
-          <svg className="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-          </svg>
-          <p>Select a unit to view quotations</p>
-        </div>
-      </div>
     );
   }
 
   return (
     <>
-      <div className="flex-1 overflow-y-auto p-6">
-        <h1 className={`text-2xl font-bold ${primaryClass} mb-6`}>{unit.name}</h1>
-
-        {unit.categories.map((category, index) => (
-          <QuoteCategory
-            key={index}
-            category={category}
-            race={effectiveRace}
-            unitName={unit.name}
-            recommendedSetup={recommendedSetup}
-            onAddRecommendation={onAddRecommendation}
-            game={selectedGame?.id}
-          />
-        ))}
-      </div>
+      <UnitQuotesPanel
+        unit={unit}
+        race={race}
+        recommendedSetup={recommendedSetup}
+        onAddRecommendation={onAddRecommendation}
+        selectedGame={selectedGame}
+      />
       <SelectionActionBar />
     </>
   );

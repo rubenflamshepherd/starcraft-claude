@@ -1,0 +1,34 @@
+:root {
+  --surface-950: #030712;
+  --surface-900: #111827;
+  --surface-850: #172033;
+  --surface-800: #1f2937;
+  --surface-700: #334155;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --accent-primary: #0ea5e9;
+  --accent-success: #16a34a;
+  --accent-warn: #f59e0b;
+  --accent-danger: #ef4444;
+}
+
+.app-background {
+  background:
+    radial-gradient(circle at 10% 20%, rgb(14 165 233 / 0.16), transparent 40%),
+    radial-gradient(circle at 90% 0%, rgb(251 146 60 / 0.12), transparent 45%),
+    linear-gradient(180deg, #020617 0%, #030712 45%, #020617 100%);
+}
+
+.surface-panel {
+  border: 1px solid rgb(148 163 184 / 0.14);
+  background: rgb(15 23 42 / 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.surface-panel-strong {
+  border: 1px solid rgb(148 163 184 / 0.2);
+  background: rgb(15 23 42 / 0.9);
+}
