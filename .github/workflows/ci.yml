@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: sc2-downloader/server
+        working-directory: claude-code-notif-manager/server
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: sc2-downloader/frontend
+        working-directory: claude-code-notif-manager/frontend
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
