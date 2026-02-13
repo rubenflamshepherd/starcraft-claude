@@ -77,7 +77,7 @@ function SortableRecommendation({ rec, hook, hookNames, onMoveRecommendation, on
   );
 }
 
-export default function UnitPanel({ unit, race = 'protoss', sections = [], quoteSearchQuery = '', isHomeView = false, isRecommendedView = false, recommendedSetup = null, onRemoveRecommendation = null, onMoveRecommendation = null, onReorderRecommendations = null, onAddRecommendation = null, onImportSetup = null, onNavigate = null, selectedGame = null, lists = [], activeListId = 'default', onCreateList = null, onDeleteList = null, onRenameList = null, onSetActiveList = null }) {
+export default function UnitPanel({ unit, race = 'protoss', sections = [], quoteSearchQuery = '', isHomeView = false, isRecommendedView = false, recommendedSetup = null, onRemoveRecommendation = null, onMoveRecommendation = null, onReorderRecommendations = null, onAddRecommendation = null, onImportSetup = null, onNavigate = null, selectedGame = null, lists = [], activeListId = 'default', onCreateList = null, onDeleteList = null, onRenameList = null }) {
   // Use unit's race for styling when available (for "all" tab), otherwise use selected race
   const effectiveRace = unit?.race || race;
   const primaryClass = getFactionStyles(effectiveRace).primaryClass;
@@ -93,8 +93,6 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
   const [downloadProgress, setDownloadProgress] = useState({ current: 0, total: 0 });
 
   // Save to .claude state
-  const [isSaving, setIsSaving] = useState(false);
-  const [saveResult, setSaveResult] = useState(null);
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
 
   const handleDownloadAll = async () => {
@@ -141,57 +139,6 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
 
     setIsDownloading(false);
     setDownloadProgress({ current: 0, total: 0 });
-  };
-
-  const handleSaveToSounds = async () => {
-    if (!recommendedSetup?.hooks) return;
-
-    setIsSaving(true);
-    setSaveResult(null);
-
-    try {
-      // Prepare all quotes grouped by hook/folder
-      const allQuotes = [];
-      for (const hook of recommendedSetup.hooks) {
-        const folderName = HOOK_TO_FOLDER[hook.name] || hook.name.toLowerCase();
-        for (const rec of hook.recommendations) {
-          const urlMatch = rec.audioUrl.match(/\/([^/]+)\.ogg\//);
-          const baseFilename = urlMatch ? urlMatch[1] : `audio_${allQuotes.length}`;
-          const filename = `${baseFilename} - ${rec.text.replace(/[/\\:*?"<>|]/g, '')}.mp3`;
-          allQuotes.push({
-            audioUrl: rec.audioUrl,
-            filename,
-            folder: folderName,
-          });
-        }
-      }
-
-      const response = await fetch('http://localhost:3001/api/save-to-sounds-all', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ quotes: allQuotes }),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Save failed');
-      }
-
-      setSaveResult({
-        success: true,
-        saved: result.saved,
-        skipped: result.skipped,
-        deleted: result.deleted
-      });
-      setTimeout(() => setSaveResult(null), 5000);
-    } catch (error) {
-      console.error('Save error:', error);
-      setSaveResult({ success: false, error: error.message });
-      setTimeout(() => setSaveResult(null), 3000);
-    } finally {
-      setIsSaving(false);
-    }
   };
 
   const handleExportSetup = () => {
@@ -293,17 +240,9 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
           <div className="mb-6 flex items-start justify-between">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <select
-                  value={activeListId}
-                  onChange={(e) => onSetActiveList?.(e.target.value)}
-                  className="text-2xl font-bold text-amber-400 bg-transparent border-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-amber-400/50 rounded"
-                >
-                  {lists.map(list => (
-                    <option key={list.id} value={list.id} className="bg-gray-900 text-amber-400">
-                      {list.name}
-                    </option>
-                  ))}
-                </select>
+                <h1 className="text-2xl font-bold text-amber-400">
+                  {lists.find(l => l.id === activeListId)?.name || 'Recommended Setup'}
+                </h1>
                 <button
                   onClick={() => {
                     const name = window.prompt('New list name:');
@@ -349,29 +288,6 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
               </p>
             </div>
             <div className="flex items-center gap-2 relative">
-              <button
-                onClick={handleSaveToSounds}
-                disabled={isSaving}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-500/20 text-green-400 hover:bg-green-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                title="Save directly to ~/.claude/sounds/"
-              >
-                {isSaving ? (
-                  <>
-                    <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                    <span>Saving...</span>
-                  </>
-                ) : (
-                  <>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
-                    </svg>
-                    <span>Sync to .claude</span>
-                  </>
-                )}
-              </button>
               <div className="relative">
                 <button
                   onClick={() => setShowSettingsMenu(!showSettingsMenu)}
@@ -422,16 +338,6 @@ export default function UnitPanel({ unit, race = 'protoss', sections = [], quote
                   </>
                 )}
               </div>
-              {saveResult && (
-                <div className={`absolute -bottom-10 right-0 px-3 py-1.5 rounded text-sm whitespace-nowrap ${
-                  saveResult.success ? 'bg-green-800 text-green-100' : 'bg-red-800 text-red-100'
-                }`}>
-                  {saveResult.success
-                    ? `Synced: ${saveResult.saved} new, ${saveResult.skipped} existing, ${saveResult.deleted} removed`
-                    : `Error: ${saveResult.error}`
-                  }
-                </div>
-              )}
             </div>
           </div>
 

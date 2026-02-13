@@ -176,7 +176,7 @@ export default function LandingPage({ onNavigate }) {
           Game Sounds for Claude Code
         </h1>
         <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
-          Add iconic game quotes to your Claude Code sessions. Browse hundreds of voice lines, preview them, and save directly to your <code className="text-amber-400 bg-gray-800 px-1.5 py-0.5 rounded">.claude/sounds</code> folder.
+          Add iconic game quotes to your Claude Code sessions. Browse hundreds of voice lines, preview them, and connect them directly to your Claude Code.
         </p>
         <div className="flex items-center justify-center gap-4 flex-wrap">
           <button

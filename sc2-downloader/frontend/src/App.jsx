@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import UnitPanel from './components/UnitPanel';
+import HeaderNav from './components/HeaderNav';
 import gamesRegistry from './data/games.json';
 import initialRecommendedSetup from './data/recommendedSetup.json';
 import { getFactionStyles } from './utils/factionStyles';
@@ -18,6 +19,14 @@ import {
 } from './utils/listManager';
 
 const STORAGE_KEY = 'sc2-quotes-recommended-setup';
+const HOOK_TO_FOLDER = {
+  SessionStart: 'start',
+  UserPromptSubmit: 'userpromptsubmit',
+  Stop: 'done',
+  PreCompact: 'precompact',
+  PermissionPrompt: 'permission',
+  Question: 'question',
+};
 
 function getInitialListsState() {
   const saved = localStorage.getItem(STORAGE_KEY);
@@ -45,6 +54,8 @@ function App() {
   const [selectedUnit, setSelectedUnit] = useState(null);
   const [quoteSearchQuery, setQuoteSearchQuery] = useState('');
   const [listsState, setListsState] = useState(getInitialListsState);
+  const [isSyncingToClaude, setIsSyncingToClaude] = useState(false);
+  const [syncResult, setSyncResult] = useState(null);
 
   const activeList = getActiveList(listsState);
   // Derive recommendedSetup from activeList for backward compatibility with child components
@@ -129,6 +140,56 @@ function App() {
     }
   };
 
+  const handleSyncToClaude = async () => {
+    if (!recommendedSetup?.hooks) return;
+
+    setIsSyncingToClaude(true);
+    setSyncResult(null);
+
+    try {
+      const allQuotes = [];
+      for (const hook of recommendedSetup.hooks) {
+        const folderName = HOOK_TO_FOLDER[hook.name] || hook.name.toLowerCase();
+        for (const rec of hook.recommendations) {
+          const urlMatch = rec.audioUrl.match(/\/([^/]+)\.ogg\//);
+          const baseFilename = urlMatch ? urlMatch[1] : `audio_${allQuotes.length}`;
+          const filename = `${baseFilename} - ${rec.text.replace(/[/\\:*?"<>|]/g, '')}.mp3`;
+          allQuotes.push({
+            audioUrl: rec.audioUrl,
+            filename,
+            folder: folderName,
+          });
+        }
+      }
+
+      const response = await fetch('http://localhost:3001/api/save-to-sounds-all', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ quotes: allQuotes }),
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || 'Sync failed');
+      }
+
+      setSyncResult({
+        success: true,
+        saved: result.saved,
+        skipped: result.skipped,
+      });
+      setTimeout(() => setSyncResult(null), 5000);
+    } catch (error) {
+      setSyncResult({
+        success: false,
+        error: error.message,
+      });
+      setTimeout(() => setSyncResult(null), 4000);
+    } finally {
+      setIsSyncingToClaude(false);
+    }
+  };
+
   const isHomeView = selectedView === 'home';
   const isRecommendedView = selectedView === 'recommended';
   const selectedFaction = (isRecommendedView || isHomeView) ? 'all' : selectedView;
@@ -161,45 +222,55 @@ function App() {
   };
 
   return (
-    <div className={`flex h-screen ${getBgClass()}`}>
-      <Sidebar
-        sections={currentSections}
-        selectedUnit={selectedUnit}
-        onSelectUnit={setSelectedUnit}
-        selectedView={selectedView}
-        onViewChange={handleViewChange}
-        views={VIEWS}
-        quoteSearchQuery={quoteSearchQuery}
-        onQuoteSearchChange={setQuoteSearchQuery}
-        recommendedSetup={recommendedSetup}
+    <div className={`flex h-screen flex-col ${getBgClass()}`}>
+      <HeaderNav
         selectedGame={selectedGame}
         games={gamesRegistry.games}
         onGameChange={handleGameChange}
         lists={listsState.lists}
         activeListId={listsState.activeListId}
-      />
-      <UnitPanel
-        unit={selectedUnit}
-        race={selectedFaction}
-        sections={currentSections}
-        quoteSearchQuery={quoteSearchQuery}
-        isHomeView={isHomeView}
-        isRecommendedView={isRecommendedView}
-        recommendedSetup={recommendedSetup}
-        onRemoveRecommendation={handleRemoveRecommendation}
-        onMoveRecommendation={handleMoveRecommendation}
-        onReorderRecommendations={handleReorderRecommendations}
-        onAddRecommendation={handleAddRecommendation}
-        onImportSetup={handleImportSetup}
-        onNavigate={handleViewChange}
-        selectedGame={selectedGame}
-        lists={listsState.lists}
-        activeListId={listsState.activeListId}
-        onCreateList={handleCreateList}
-        onDeleteList={handleDeleteList}
-        onRenameList={handleRenameList}
         onSetActiveList={handleSetActiveList}
+        onSyncToClaude={handleSyncToClaude}
+        isSyncing={isSyncingToClaude}
+        syncResult={syncResult}
       />
+      <div className="flex min-h-0 flex-1">
+        <Sidebar
+          sections={currentSections}
+          selectedUnit={selectedUnit}
+          onSelectUnit={setSelectedUnit}
+          selectedView={selectedView}
+          onViewChange={handleViewChange}
+          views={VIEWS}
+          quoteSearchQuery={quoteSearchQuery}
+          onQuoteSearchChange={setQuoteSearchQuery}
+          recommendedSetup={recommendedSetup}
+          lists={listsState.lists}
+          activeListId={listsState.activeListId}
+          selectedGame={selectedGame}
+        />
+        <UnitPanel
+          unit={selectedUnit}
+          race={selectedFaction}
+          sections={currentSections}
+          quoteSearchQuery={quoteSearchQuery}
+          isHomeView={isHomeView}
+          isRecommendedView={isRecommendedView}
+          recommendedSetup={recommendedSetup}
+          onRemoveRecommendation={handleRemoveRecommendation}
+          onMoveRecommendation={handleMoveRecommendation}
+          onReorderRecommendations={handleReorderRecommendations}
+          onAddRecommendation={handleAddRecommendation}
+          onImportSetup={handleImportSetup}
+          onNavigate={handleViewChange}
+          selectedGame={selectedGame}
+          lists={listsState.lists}
+          activeListId={listsState.activeListId}
+          onCreateList={handleCreateList}
+          onDeleteList={handleDeleteList}
+          onRenameList={handleRenameList}
+        />
+      </div>
     </div>
   );
 }

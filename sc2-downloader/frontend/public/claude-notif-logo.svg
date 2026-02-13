@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Robot head with diagonal sound waves and larger eyes">
+  <g fill="none" stroke="#F97316" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="40" y="72" width="120" height="112" rx="24"/>
+    <rect x="68" y="106" width="24" height="24" fill="#F97316" stroke="none"/>
+    <rect x="108" y="106" width="24" height="24" fill="#F97316" stroke="none"/>
+  </g>
+  <g fill="none" stroke="#F97316" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M182 108 L198 114 L198 142 L182 148"/>
+    <path d="M200 90 L222 98 L222 158 L200 166"/>
+    <path d="M218 64 L244 74 L244 182 L218 192"/>
+  </g>
+</svg>

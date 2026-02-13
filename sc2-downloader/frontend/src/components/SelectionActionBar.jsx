@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import CustomSelect from './CustomSelect';
 import { useSelection } from '../contexts/SelectionContext';
 
 const SOUND_FOLDERS = [
@@ -137,17 +138,13 @@ export default function SelectionActionBar() {
 
       {/* Folder selector and save button */}
       <div className="flex items-center gap-2 border-l border-gray-700 pl-4">
-        <select
+        <CustomSelect
           value={selectedFolder}
-          onChange={(e) => setSelectedFolder(e.target.value)}
-          className="bg-gray-800 text-gray-300 border border-gray-600 rounded px-2 py-1.5 text-sm"
-        >
-          {SOUND_FOLDERS.map(folder => (
-            <option key={folder.value} value={folder.value}>
-              {folder.label}
-            </option>
-          ))}
-        </select>
+          onChange={setSelectedFolder}
+          options={SOUND_FOLDERS.map((folder) => ({ value: folder.value, label: folder.label }))}
+          openUpward
+          buttonClassName="px-2 py-1.5 text-sm min-w-[10rem]"
+        />
         <button
           onClick={handleSaveToSounds}
           disabled={isSaving}
