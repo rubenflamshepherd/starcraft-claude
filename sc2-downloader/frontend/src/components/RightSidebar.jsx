@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { getFactionStyles } from '../utils/factionStyles';
 
 export default function RightSidebar({ recommendedSetup, isOpen, onToggle, listName }) {
-  const hooks = recommendedSetup?.hooks || [];
+  const hooks = useMemo(() => recommendedSetup?.hooks || [], [recommendedSetup?.hooks]);
   const [expandedSections, setExpandedSections] = useState({});
 
-  useEffect(() => {
+  const hooksKey = hooks.map(h => h.name).join(',');
+  const [prevHooksKey, setPrevHooksKey] = useState(hooksKey);
+  if (hooksKey !== prevHooksKey) {
+    setPrevHooksKey(hooksKey);
     setExpandedSections(
       hooks.reduce((acc, hook) => ({ ...acc, [hook.name]: true }), {})
     );
-  }, [hooks]);
+  }
 
   const toggleSection = (sectionName) => {
     setExpandedSections((prev) => ({
