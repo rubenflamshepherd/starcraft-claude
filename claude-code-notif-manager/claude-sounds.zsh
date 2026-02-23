@@ -38,18 +38,43 @@ _claude_random_sound() {
   echo "${files[rand % ${#files[@]} + 1]}"
 }
 
+# Play a sound file using the best available player
+_claude_play() {
+  local sound_file="$1"
+  if command -v afplay &>/dev/null; then
+    # macOS
+    if [ -n "$CLAUDE_SOUND_VOLUME" ]; then
+      afplay -v "$CLAUDE_SOUND_VOLUME" "$sound_file" &
+    else
+      afplay "$sound_file" &
+    fi
+  elif command -v pw-play &>/dev/null; then
+    # PipeWire
+    if [ -n "$CLAUDE_SOUND_VOLUME" ]; then
+      pw-play --volume="$CLAUDE_SOUND_VOLUME" "$sound_file" &
+    else
+      pw-play "$sound_file" &
+    fi
+  else
+    # ffplay fallback
+    if [ -n "$CLAUDE_SOUND_VOLUME" ]; then
+      local vol=$(( CLAUDE_SOUND_VOLUME * 100 ))
+      ffplay -nodisp -autoexit -loglevel quiet -volume "$vol" "$sound_file" &
+    else
+      ffplay -nodisp -autoexit -loglevel quiet "$sound_file" &
+    fi
+  fi
+}
+
 # Generic file watcher that plays a random sound from directory when trigger file appears
 _claude_watcher() {
   local watch_file="$1" sound_dir="$2"
-  fswatch -o "$watch_file" 2>/dev/null | while read; do
+  local watch_dir="${watch_file:h}"
+  fswatch -o "$watch_dir" 2>/dev/null | while read; do
     if [ -f "$watch_file" ]; then
       local sound_file=$(_claude_random_sound "$sound_dir")
       if [ -n "$sound_file" ]; then
-        if [ -n "$CLAUDE_SOUND_VOLUME" ]; then
-          afplay -v "$CLAUDE_SOUND_VOLUME" "$sound_file" &
-        else
-          afplay "$sound_file" &
-        fi
+        _claude_play "$sound_file"
       fi
       rm -f "$watch_file"
     fi
